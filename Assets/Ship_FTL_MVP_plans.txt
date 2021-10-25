@@ -1,0 +1,20 @@
+Minimum viable product:
+
+Ship HP
+Base HP
+AKA universal HP script 
+
+Ship shoots base
+
+CANNON SHOOTING
+press X to make ship active target for cannon
+when active target != null
+	-> shoot towards target
+
+SHIP'S RETURN FIRE
+base has big sphere trigger
+	When ship inside trigger,
+	(and cannon loaded (not urgent))
+		fire at base
+
+Cannon shoot button
