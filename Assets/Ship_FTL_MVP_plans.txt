@@ -1,15 +1,40 @@
 Minimum viable product:
 
+HP SYSTEM
 Ship HP
-Base HP
-AKA universal HP script 
+Cannon HP
 
-Ship shoots base
+(one script)
+public int HP
+when HP <= 0 -> gameobject.SetActive = false
 
-CANNON SHOOTING
+CANNON SHOOTING (coroutine? ask Turkka)
 press X to make ship active target for cannon
-when active target != null
-	-> shoot towards target
+
+if loadTimer <= 0f -> loaded = true
+
+if active target != null
+if loaded == true
+	Fire();
+
+	Fire(){
+	make a random check if hit or no hit
+	
+	if hit:
+	Show fake projectile
+	Show impact
+		target.HP - 1
+	
+	if !hit:
+	Show fake projectile
+
+	loaded = false
+	(float) loadTimer = loadTime;
+	}
+
+	LOADING TIMER
+		(in start) loadTimer = loadTime
+		(in update) make necessary timer actions OR use coroutine?
 
 SHIP'S RETURN FIRE
 base has big sphere trigger
@@ -17,4 +42,10 @@ base has big sphere trigger
 	(and cannon loaded (not urgent))
 		fire at base
 
-Cannon shoot button
+CANNON LOOKS AT SHIP
+
+FIRING EFFECTS
+
+NOTES:
+	LOADING SYSTEM NOT URGENT
+		FOR STARTERS, JUST SHOOT ONCE (use boolean to trigger only once)
