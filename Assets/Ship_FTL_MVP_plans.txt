@@ -8,8 +8,9 @@ Cannon HP
 public int HP
 when HP <= 0 -> gameobject.SetActive = false
 
-CANNON SHOOTING (coroutine? ask Turkka)
-press X to make ship active target for cannon
+-	-	-	-	-	-	-	-	-	-	-
+
+CANNON SHOOTING 
 
 if loadTimer <= 0f -> loaded = true
 
@@ -36,16 +37,38 @@ if loaded == true
 		(in start) loadTimer = loadTime
 		(in update) make necessary timer actions OR use coroutine?
 
+-	-	-	-	-	-	-	-	-	-	-
+
+TARGETING
+
+make another ship to shoot
+select active target (with 1, 2?)
+active target GO fills cannonTarget variable
+LookAt for cannon towards ship?
+
+
+-	-	-	-	-	-	-	-	-	-	-	
+
 SHIP'S RETURN FIRE
 base has big sphere trigger
 	When ship inside trigger,
 	(and cannon loaded (not urgent))
 		fire at base
 
+-	-	-	-	-	-	-	-	-	-	-
+
 CANNON LOOKS AT SHIP
 
 FIRING EFFECTS
 
 NOTES:
-	LOADING SYSTEM NOT URGENT
-		FOR STARTERS, JUST SHOOT ONCE (use boolean to trigger only once)
+	TO DO:
+		fort HP
+		ships fire at fort when close enough
+
+	NICE TO HAVE:
+		loading timer graphics
+		active target graphics
+		variable hit chance based on target distance
+		moving ships
+		multiple cannon
