@@ -5,47 +5,69 @@ using UnityEngine;
 public class CannonManager : MonoBehaviour {
 
     //VFX
-    public GameObject muzzleParticle;
+    public GameObject muzzleParticleGO;
+
+    //HAS TO BE CHILD OBJECT WITH NAME 'MUZZLE'
+    public GameObject muzzleTransform;
+
+    //CONTROLS
+    public KeyCode fireKey;
 
     [SerializeField] private bool targetHasBeenHit;
-    public GameObject cannonTarget;
-    public HealthPoints hpScript;
+    public GameObject targetedGO;
+    public HealthPoints targetHpScript;
+
     public float loadTime = 2f;
+    public int damageOutput = 10;
 
     private float timeWhenLoaded;
 
-    void Start() {
-        hpScript = cannonTarget.GetComponent<HealthPoints>();
-    }
-
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            if (Time.time >= timeWhenLoaded) {
-                FireCannon();
-            }else {
-                print("'STILL LOADING!!'");
+
+        if (Input.GetKeyDown(fireKey)) {
+            if (targetedGO != null) {
+                if (Time.time >= timeWhenLoaded) {
+                    FireCannon();
+                } else {
+                    print(gameObject.name + " IS STILL LOADING!");
+                }
+            } else {
+                print(gameObject.name + "'S TARGET UNCLEAR");
             }
         }
     }
 
     void FireCannon() {
         print("'FIRE!'");
-        muzzleParticle.SetActive(true);
-        StartCoroutine("ParticleControl");
+        if (gameObject.tag == "PlayerCannon") {
+            AudioFW.Play("sfx_CannonFire");
+        } else {
+            AudioFW.Play("sfx_ShipCannonFire");
+        }
+        GameObject newMuzzleEffect = Instantiate(muzzleParticleGO, muzzleTransform.transform);
+        ParticleSystem ParticleSystemOfNewMuzzleEffect = newMuzzleEffect.gameObject.GetComponent<ParticleSystem>();
+        ParticleSystemOfNewMuzzleEffect.Stop();
+        var MainOfNewMuzzleEffect = ParticleSystemOfNewMuzzleEffect.main;
+        MainOfNewMuzzleEffect.duration = loadTime;
+        ParticleSystemOfNewMuzzleEffect.Play();
+        Destroy(newMuzzleEffect, loadTime);
+
+        //RANDOMIZE HIT OR NO HIT
         targetHasBeenHit = (Random.value > 0.5f);
 
         if (targetHasBeenHit == true) {
-            Debug.Log("splinters fly as the cannonball pierces the hull of the vessel!");
-            hpScript.TakeDamage(10);
+            Debug.Log(gameObject.name + " HAS HIT ITS ENEMY!");
+            targetHpScript.TakeDamage(damageOutput, loadTime);
         } else {
-            Debug.Log("water splashes around the ship as your valuable ammunition sinks beneath the waves...");
+            Debug.Log(gameObject.name + " MISSED!");
         }
 
         timeWhenLoaded = Time.time + loadTime;
     }
 
-    IEnumerator ParticleControl() {
-        yield return new WaitForSeconds(loadTime);
-        muzzleParticle.SetActive(false);
+    public void AssignNewTargetHPScript() {
+        targetHpScript = targetedGO.GetComponent<HealthPoints>();
+        print(gameObject.name + " HAS SIGHTED AN ENEMY!");
     }
 }
+
