@@ -6,8 +6,7 @@ public class CannonManager : MonoBehaviour {
 
     //VFX
     public GameObject muzzleParticleGO;
-
-    //HAS TO BE CHILD OBJECT WITH NAME 'MUZZLE'
+    //TRANSFORM FOR MUZZLE PARTICLE
     public GameObject muzzleTransform;
 
     //CONTROLS
@@ -16,24 +15,38 @@ public class CannonManager : MonoBehaviour {
     [SerializeField] private bool targetHasBeenHit;
     public GameObject targetedGO;
     public HealthPoints targetHpScript;
+    public TargetManager targetingScript;
 
     public float loadTime = 2f;
-    public int damageOutput = 10;
+    public int damageOutput = 33;
+    public float rangeOfGuns = 80f;
 
     private float timeWhenLoaded;
 
+    private void Start() {
+        if (gameObject.tag == "EnemyShip") {
+            targetingScript = gameObject.GetComponent<TargetManager>();
+        }
+
+        muzzleTransform = gameObject.transform.Find("Muzzle").gameObject;
+    }
+
     void Update() {
 
-        if (Input.GetKeyDown(fireKey)) {
-            if (targetedGO != null) {
-                if (Time.time >= timeWhenLoaded) {
-                    FireCannon();
+        if (targetedGO != null) {
+            if (Time.time >= timeWhenLoaded) {
+                if (gameObject.tag == "EnemyShip") {
+                    if (targetingScript.CloseEnoughToFire == true) {
+                        FireCannon();
+                    }
                 } else {
-                    print(gameObject.name + " IS STILL LOADING!");
+                    FireCannon();
                 }
             } else {
-                print(gameObject.name + "'S TARGET UNCLEAR");
+                print(gameObject.name + " IS STILL LOADING!");
             }
+        } else {
+            //print(gameObject.name + "'S TARGET UNCLEAR");
         }
     }
 

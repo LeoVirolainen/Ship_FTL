@@ -63,17 +63,10 @@ FIRING EFFECTS
 
 NOTES:
 	TO DO:
-		AI select target based on proximity, not index 0 in list
-		player target selection (1-9 keys)
-		autofire
-		ships fire at fort when close enough
-		multicannon + multiship
-		UI
+		
 
 	NICE TO HAVE:
-		pick random cannon from ship when firing
 		loading timer graphics
 		active target graphics
 		variable hit chance based on target distance
 		moving ships
-		multiple playercannon
