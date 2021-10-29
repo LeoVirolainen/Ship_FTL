@@ -18,6 +18,15 @@ public class PlayerTargetManager : MonoBehaviour {
         clickScript = GameObject.Find("MouseInputFW").GetComponent<MouseInputFW>();
     }
 
+    private void Update() {
+        if (clickScript.selectedTargetForPCannon != null) {
+            if (clickScript.selectedPCannon == gameObject) {
+                transform.LookAt(myCannonScript.targetedGO.transform);
+                transform.Rotate(0, 180, 0);
+            }
+        }
+    }
+
     private void OnMouseDown() {
         clickScript.selectedPCannon = gameObject;
         clickScript.ClickedOnPCannon();

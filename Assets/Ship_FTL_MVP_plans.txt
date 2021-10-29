@@ -42,7 +42,7 @@ if loaded == true
 TARGETING
 
 make another ship to shoot
-select active target (with 1, 2?)
+select active target
 active target GO fills cannonTarget variable
 LookAt for cannon towards ship?
 
@@ -63,7 +63,8 @@ FIRING EFFECTS
 
 NOTES:
 	TO DO:
-		
+		disable unlimited range on PCannon
+		Moving ships
 
 	NICE TO HAVE:
 		loading timer graphics
