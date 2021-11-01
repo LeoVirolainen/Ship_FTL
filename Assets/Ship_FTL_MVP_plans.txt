@@ -63,8 +63,10 @@ FIRING EFFECTS
 
 NOTES:
 	TO DO:
+		Make destinationCol object check if collider is myShipScript.gameObject, if not, don't do anything: fixes stranger ships entering cols that arent their own
 		disable unlimited range on PCannon
-		Moving ships
+		AI seeks target close to cannon if HP high, if HP less than 50%, seek target out of cannon range
+		UI
 
 	NICE TO HAVE:
 		loading timer graphics

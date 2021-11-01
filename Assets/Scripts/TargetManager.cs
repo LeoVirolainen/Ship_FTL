@@ -46,6 +46,7 @@ public class TargetManager : MonoBehaviour {
                 myCannonScript.targetedGO = enemyTargets[i];
             }
         }
+
         myCannonScript.AssignNewTargetHPScript();
         if (distanceToTarget <= myCannonScript.rangeOfGuns) {
             CloseEnoughToFire = true;

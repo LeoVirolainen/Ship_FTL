@@ -16,8 +16,4 @@ public class MouseInputFW : MonoBehaviour {
         selectedPCannon.GetComponent<CannonManager>().targetedGO = selectedTargetForPCannon;
         selectedPCannon.GetComponent<PlayerTargetManager>().FindTarget();
     }
-
-    void Update() {
-
-    }
 }

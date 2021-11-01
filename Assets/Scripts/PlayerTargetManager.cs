@@ -12,18 +12,22 @@ public class PlayerTargetManager : MonoBehaviour {
 
     //LOCAL VARIABLES
     public GameObject[] enemyTargets;
+    [SerializeField] private bool hasTarget = false;
 
     private void Start() {
         myCannonScript = gameObject.GetComponent<CannonManager>();
         clickScript = GameObject.Find("MouseInputFW").GetComponent<MouseInputFW>();
     }
 
-    private void Update() {
+    private void Update() { //LOOKAT TARGET
         if (clickScript.selectedTargetForPCannon != null) {
             if (clickScript.selectedPCannon == gameObject) {
-                transform.LookAt(myCannonScript.targetedGO.transform);
-                transform.Rotate(0, 180, 0);
+                hasTarget = true;
             }
+        }
+        if (hasTarget == true) {
+            transform.LookAt(myCannonScript.targetedGO.transform);
+            transform.Rotate(0, 180, 0);
         }
     }
 

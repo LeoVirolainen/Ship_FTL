@@ -42,16 +42,14 @@ public class CannonManager : MonoBehaviour {
                 } else {
                     FireCannon();
                 }
-            } else {
-                print(gameObject.name + " IS STILL LOADING!");
-            }
+            } 
         } else {
             //print(gameObject.name + "'S TARGET UNCLEAR");
         }
     }
 
     void FireCannon() {
-        print("'FIRE!'");
+        print(gameObject.name + "'FIRES!'");
         if (gameObject.tag == "PlayerCannon") {
             AudioFW.Play("sfx_CannonFire");
         } else {

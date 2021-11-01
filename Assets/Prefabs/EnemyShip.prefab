@@ -2226,6 +2226,7 @@ MonoBehaviour:
   seekTargetKey: 263
   enemyTargets: []
   CloseEnoughToFire: 0
+  distanceToTarget: 0
 --- !u!136 &9217023937543386650
 CapsuleCollider:
   m_ObjectHideFlags: 0
