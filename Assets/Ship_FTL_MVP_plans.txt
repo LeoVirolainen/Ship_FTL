@@ -1,75 +1,23 @@
 
-
-HP SYSTEM
-Ship HP
-Cannon HP
-
-(one script)
-public int HP
-when HP <= 0 -> gameobject.SetActive = false
+N O T E S
 
 -	-	-	-	-	-	-	-	-	-	-
 
-CANNON SHOOTING 
-
-if loadTimer <= 0f -> loaded = true
-
-if active target != null
-if loaded == true
-	Fire();
-
-	Fire(){
-	make a random check if hit or no hit
-	
-	if hit:
-	Show fake projectile
-	Show impact
-		target.HP - 1
-	
-	if !hit:
-	Show fake projectile
-
-	loaded = false
-	(float) loadTimer = loadTime;
-	}
-
-	LOADING TIMER
-		(in start) loadTimer = loadTime
-		(in update) make necessary timer actions OR use coroutine?
-
--	-	-	-	-	-	-	-	-	-	-
-
-TARGETING
-
-make another ship to shoot
-select active target
-active target GO fills cannonTarget variable
-LookAt for cannon towards ship?
-
-
--	-	-	-	-	-	-	-	-	-	-	
-
-SHIP'S RETURN FIRE
-base has big sphere trigger
-	When ship inside trigger,
-	(and cannon loaded (not urgent))
-		fire at base
-
--	-	-	-	-	-	-	-	-	-	-
-
-CANNON LOOKS AT SHIP
-
-FIRING EFFECTS
-
-NOTES:
 	TO DO:
-		Make destinationCol object check if collider is myShipScript.gameObject, if not, don't do anything: fixes stranger ships entering cols that arent their own
-		disable unlimited range on PCannon
-		AI seeks target close to cannon if HP high, if HP less than 50%, seek target out of cannon range
-		UI
+		(disable unlimited range on PCannon?)
+		UI -> get cursor to (worldPoint?)
+			(y is constant)
+				draw linerenderer from cannon to cursor
+
+			when clicked on ship
+			linerenderer from cannon to ship 
+				fades/disappears after a time (coroutine or destroy?)
+
+	UPCOMING:
+		ship spawning (endless mode)
+		ship muzzle flash towards enemy
 
 	NICE TO HAVE:
 		loading timer graphics
 		active target graphics
-		variable hit chance based on target distance
-		moving ships
+		variable hit chance based on target distances

@@ -8,6 +8,7 @@ public class MouseInputFW : MonoBehaviour {
 
     public void ClickedOnPCannon() {
         print("You clicked a cannon!");
+        //Make selected cannon find all enemy ships
         selectedPCannon.GetComponent<PlayerTargetManager>().enemyTargets = GameObject.FindGameObjectsWithTag("EnemyShip");
     }
 

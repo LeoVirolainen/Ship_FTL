@@ -10,13 +10,22 @@ public class ShipMover : MonoBehaviour {
 
     public GameObject destinationCol;
 
+    public HealthPoints myHp;
+    public int myHpAtStart;
+
     void Start() {
         myAgent = GetComponent<NavMeshAgent>();
+
+        myHp = gameObject.GetComponent<HealthPoints>();
+        myHpAtStart = myHp.hP;
     }
 
     void Update() {
         if (hasDestination == false) {
-            destination = new Vector3(Random.Range(100, -100), 0, Random.Range(0, -100));
+            //Check if HP is high enough to go close or to keep one's distance
+            if (myHp.hP > (myHpAtStart / 2)) {
+                destination = new Vector3(Random.Range(60, -70), 0, Random.Range(0, -30));
+            } else { destination = new Vector3(Random.Range(100, -100), 0, Random.Range(-40, -100)); }
             GameObject newDestinationObject = Instantiate(destinationCol, destination, /*this is just "no rotation" >*/ Quaternion.identity);
             ShipDestination scriptOfDestObject = newDestinationObject.GetComponent<ShipDestination>();
             scriptOfDestObject.shipMoveScript = gameObject.GetComponent<ShipMover>();

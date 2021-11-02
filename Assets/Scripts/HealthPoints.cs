@@ -7,7 +7,7 @@ public class HealthPoints : MonoBehaviour {
     public GameObject takeHitParticle;
     public float impactParticleDuration;
 
-    [SerializeField] private int hP;
+    public int hP;
 
 
     public void TakeDamage(int damage, float reloadTime) {
