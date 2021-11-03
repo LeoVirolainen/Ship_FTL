@@ -5,15 +5,11 @@ N O T E S
 
 	TO DO:
 		(disable unlimited range on PCannon?)
-		UI -> get cursor to (worldPoint?)
-			(y is constant)
-				draw linerenderer from cannon to cursor
-
-			when clicked on ship
-			linerenderer from cannon to ship 
-				fades/disappears after a time (coroutine or destroy?)
+		UI icon for selected/active cannon
+		include targeting reticle for selected ship in white line
 
 	UPCOMING:
+
 		ship spawning (endless mode)
 		ship muzzle flash towards enemy
 

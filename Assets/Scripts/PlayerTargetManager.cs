@@ -6,6 +6,7 @@ public class PlayerTargetManager : MonoBehaviour {
 
     public CannonManager myCannonScript;
     public MouseInputFW clickScript;
+    public UIFW uIScript;
 
     //CONTROLS
     public KeyCode seekTargetKey;
@@ -17,6 +18,7 @@ public class PlayerTargetManager : MonoBehaviour {
     private void Start() {
         myCannonScript = gameObject.GetComponent<CannonManager>();
         clickScript = GameObject.Find("MouseInputFW").GetComponent<MouseInputFW>();
+        uIScript = GameObject.Find("UIManager").GetComponent<UIFW>();
     }
 
     private void Update() { //LOOKAT TARGET
@@ -26,14 +28,18 @@ public class PlayerTargetManager : MonoBehaviour {
             }
         }
         if (hasTarget == true) {
-            transform.LookAt(myCannonScript.targetedGO.transform);
-            transform.Rotate(0, 180, 0);
+            if (myCannonScript.targetedGO != null) {
+                transform.LookAt(myCannonScript.targetedGO.transform);
+                transform.Rotate(0, 180, 0);
+            }
         }
     }
 
     private void OnMouseDown() {
         clickScript.selectedPCannon = gameObject;
         clickScript.ClickedOnPCannon();
+
+        uIScript.CannonSelectedStart(gameObject);
     }
 
     public void FindTarget() {

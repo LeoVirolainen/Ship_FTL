@@ -4,19 +4,58 @@ using UnityEngine;
 
 public class UIFW : MonoBehaviour {
     public Vector3 mousePos;
-    public GameObject cursor;
 
+    public GameObject mouseUIParent;
+    public GameObject cursorObj;
     public LineRenderer mouseLine;
 
     public GameObject lineStartPointGO;
+    public GameObject lineEndPointGO;
+
     public Vector3 lineStartPoint;
+    public Vector3 lineEndPoint;
 
     void FixedUpdate() {
-        lineStartPoint = lineStartPointGO.transform.position;
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        cursor.transform.position = new Vector3 (mousePos.x, 10, mousePos.z);
+        if (lineStartPointGO != null) {
+            //get Vector3 from mouse
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //make cursor graphics follow mouse Vector3
+            cursorObj.transform.position = new Vector3(mousePos.x, 10, mousePos.z);
 
-        mouseLine.SetPosition(0, new Vector3(lineStartPoint.x, 10, lineStartPoint.z));
-        mouseLine.SetPosition(1, cursor.transform.position);
+            //assign values to variables
+            lineStartPoint = lineStartPointGO.transform.position;   //set lineRenderer start at startGO
+
+            //make line end point be the cursor if no ship end point exists yet
+            if (lineEndPointGO == null) {
+                lineEndPoint = cursorObj.transform.position; //set line end value at cursor 
+            } else { //set line end at endGO
+                cursorObj.transform.position = lineEndPoint;
+                lineEndPoint = lineEndPointGO.transform.position;
+            }
+
+            //Set line start and end coords
+            mouseLine.SetPosition(0, new Vector3(lineStartPoint.x, 10, lineStartPoint.z));
+            mouseLine.SetPosition(1, lineEndPoint);
+        }
+    }
+
+    public void CannonSelectedStart(GameObject startCannon) {
+        lineEndPointGO = null;
+        lineStartPointGO = startCannon; //set StartPointGO as the cannon we clicked
+        if (mouseUIParent.activeSelf == true) {
+            mouseUIParent.SetActive(false);
+        }       
+
+        cursorObj = mouseUIParent.GetComponentInChildren<MeshRenderer>().gameObject;
+        mouseLine = mouseUIParent.GetComponentInChildren<LineRenderer>();
+
+        mouseUIParent.SetActive(true);  //make graphics visible
+    }
+
+    public void ShipSelectedStart(GameObject endShip) {
+        lineEndPointGO = endShip;  //set line end at ship we clicked
+        lineStartPointGO.GetComponent<TargetLineHandler>().instantiateNewLine(lineStartPointGO, lineEndPointGO);
+
+        mouseUIParent.SetActive(false);
     }
 }

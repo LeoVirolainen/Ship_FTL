@@ -24,7 +24,7 @@ public class HealthPoints : MonoBehaviour {
 
         hP = hP - damage;
         if (hP <= 0) {
-            Destroy(gameObject, 5f);
+            Destroy(gameObject, 1f);
         }
     }
 

@@ -6,6 +6,7 @@ public class TargetManager : MonoBehaviour {
 
     public CannonManager myCannonScript;
     public MouseInputFW clickScript;
+    public UIFW uIScript;
 
     //CONTROLS
     public KeyCode seekTargetKey;
@@ -18,11 +19,14 @@ public class TargetManager : MonoBehaviour {
     private void Start() {
         myCannonScript = gameObject.GetComponent<CannonManager>();
         clickScript = GameObject.Find("MouseInputFW").GetComponent<MouseInputFW>();
+        uIScript = GameObject.Find("UIManager").GetComponent<UIFW>();
     }
 
     private void OnMouseDown() {
         clickScript.selectedTargetForPCannon = gameObject;
         clickScript.ClickedOnShip();
+
+        uIScript.ShipSelectedStart(gameObject);
     }
 
     private void Update() {
