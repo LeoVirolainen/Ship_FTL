@@ -64,7 +64,12 @@ public class CannonManager : MonoBehaviour {
         Destroy(newMuzzleEffect, loadTime);
 
         //RANDOMIZE HIT OR NO HIT
-        targetHasBeenHit = (Random.value > 0.5f);
+        if (gameObject.tag == "EnemyShip") {
+            targetHasBeenHit = (Random.value > (targetingScript.distanceToTarget / 100));
+            print(gameObject.name + targetingScript.distanceToTarget / 100);
+        } else {
+            targetHasBeenHit = (Random.value > 0.5f);
+        }
 
         if (targetHasBeenHit == true) {
             Debug.Log(gameObject.name + " HAS HIT ITS ENEMY!");
