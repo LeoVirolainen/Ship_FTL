@@ -4,14 +4,13 @@ N O T E S
 -	-	-	-	-	-	-	-	-	-	-
 
 	TO DO:
-		(disable unlimited range on PCannon?)
-		ship spawning (endless mode)
+								(disable unlimited range on PCannon?)
+		DONE - ship spawning (endless mode)
 			UI icon for selected/active cannon
 			include targeting reticle for selected ship in white line
 			automatic ship target seeking/selection
 
 	UPCOMING:
-		ship spawning (endless mode)
 		ship muzzle flash towards enemy
 
 	NICE TO HAVE:
