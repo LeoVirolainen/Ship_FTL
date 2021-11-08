@@ -2268,7 +2268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b57162f895926246b42fc061465ae8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzleParticleGO: {fileID: 1716881491133855355, guid: 224d1b13532d1154d9b9cf5c2d415a91, type: 3}
+  muzzleParticleGO: {fileID: 2658531655186045138, guid: b035402e434e9614bb8b48e7d07b092a, type: 3}
   muzzleTransform: {fileID: 0}
   fireKey: 260
   targetHasBeenHit: 0
@@ -2277,7 +2277,7 @@ MonoBehaviour:
   targetingScript: {fileID: 0}
   loadTime: 2
   damageOutput: 10
-  rangeOfGuns: 80
+  rangeOfGuns: 120
 --- !u!114 &7588608209196671373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2297,6 +2297,8 @@ MonoBehaviour:
   enemyTargets: []
   CloseEnoughToFire: 0
   distanceToTarget: 0
+  waitingToScoutAgain: 0
+  scoutingInterval: 4
 --- !u!136 &1637432961757492083
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2358,7 +2360,7 @@ NavMeshAgent:
   m_Speed: 5
   m_Acceleration: 4
   avoidancePriority: 50
-  m_AngularSpeed: 80
+  m_AngularSpeed: 50
   m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -2391,7 +2393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7588608209934532045}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.2000012, y: 1.945, z: 0.8800006}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1819200622404298734}

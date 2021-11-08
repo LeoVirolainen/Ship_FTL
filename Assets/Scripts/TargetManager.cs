@@ -16,6 +16,9 @@ public class TargetManager : MonoBehaviour {
     public bool CloseEnoughToFire;
     public float distanceToTarget;
 
+    public bool waitingToScoutAgain = false;
+    public float scoutingInterval;
+
     private void Start() {
         myCannonScript = gameObject.GetComponent<CannonManager>();
         clickScript = GameObject.Find("MouseInputFW").GetComponent<MouseInputFW>();
@@ -30,18 +33,27 @@ public class TargetManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(seekTargetKey)) {
-            enemyTargets = GameObject.FindGameObjectsWithTag("PlayerCannon");
-            FindBestTarget();
+        //if (Input.GetKeyDown(seekTargetKey)) {
+            if (waitingToScoutAgain == false) {
+                StartCoroutine("FindBestTarget");
+            }
+        //}
+        //check if close enough to fire
+        if (distanceToTarget <= myCannonScript.rangeOfGuns) {
+            CloseEnoughToFire = true;
+        } else {
+            CloseEnoughToFire = false;
         }
     }
 
-    void FindBestTarget() {
+    IEnumerator FindBestTarget() { //add available PCannon to array --- measure distance to first cannon in array
+        waitingToScoutAgain = true;
+        enemyTargets = GameObject.FindGameObjectsWithTag("PlayerCannon");
         myCannonScript.targetedGO = enemyTargets[0];
         distanceToTarget = Vector3.Distance(gameObject.transform.position, enemyTargets[0].transform.position);
         print("measured dist to first cannon");
 
-        for (int i = 1; i < enemyTargets.Length; ++i) {
+        for (int i = 1; i < enemyTargets.Length; ++i) { //Go through the list of previously found cannon --- Find nearest cannon and set as target
             float nextCannonDist = Vector3.Distance(gameObject.transform.position, enemyTargets[i].transform.position);
             print("measured distance to next cannon");
             if (nextCannonDist < distanceToTarget) {
@@ -49,13 +61,10 @@ public class TargetManager : MonoBehaviour {
                 print(distanceToTarget);
                 myCannonScript.targetedGO = enemyTargets[i];
             }
-        }
-
+        } //find HP script for new target cannon
         myCannonScript.AssignNewTargetHPScript();
-        if (distanceToTarget <= myCannonScript.rangeOfGuns) {
-            CloseEnoughToFire = true;
-        } else {
-            CloseEnoughToFire = false;
-        }
+
+        yield return new WaitForSeconds(scoutingInterval);
+        waitingToScoutAgain = false;
     }
 }

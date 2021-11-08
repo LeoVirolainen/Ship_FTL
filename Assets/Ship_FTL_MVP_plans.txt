@@ -4,16 +4,43 @@ N O T E S
 -	-	-	-	-	-	-	-	-	-	-
 
 	TO DO:
-								(disable unlimited range on PCannon?)
-		DONE - ship spawning (endless mode)
+		UI:
 			UI icon for selected/active cannon
 			include targeting reticle for selected ship in white line
-			automatic ship target seeking/selection
+			show valid ship target (snap? make line go green from red)
+		GAME:	
+			DONE - automatic ship target seeking/selection + scouting interval float
+		(disable unlimited range on PCannon?)
 
 	UPCOMING:
-		ship muzzle flash towards enemy
+		cannon crews take damage -> less crew = slower loading
+		get money from killing ships
+		use money to hire more crews
+			new crews get shipped in with a destructible barge
+		
+		DONE - ship muzzle flash towards enemy
+		only fire if shipSideTowardsCannon == true
+			make ship want to turn its side to cannon when in range
+
+		wind; a small force that turns rotation every now and then and lightly pushes all ships into one direction to add a random element
+
+		local scoreboard with 3-letter names :D
+
+		AI has budget (e.g. 3; smol ship = .5gp, big ship = 1gp: 3 big / 6 small / 2 big 2 small)
+			how to decide what AI spawns? random? cooldown for each ship to spawn?
+		AI measures player's threat level and scales its own budget according to that
+		AI budget has small extra variable that is added to budget and scales over time (to make failure inevitable at some point)
+
+	FIXES/OPTIMIZATIONS:
+		Don’t hide distancetotarget in code, make it public var
+			Ships have cannon range based on ship scale -> smaller ships want closer and bigger ships stay back
+		Ships have direction vector to next destination -> move faster towards destination the closer they are to facing forward toward dest
+		Separate UI from game logic
+		Use enums to determine faction of target(s) (maybe don’t use tags)
+		Make game more approachable
 
 	NICE TO HAVE:
 		loading timer graphics
 		active target graphics
-		DONE - variable hit chance based on target distances
+		JUICE:
+			destruction effect for ship and cannon
