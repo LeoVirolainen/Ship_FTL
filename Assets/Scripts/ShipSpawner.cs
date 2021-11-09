@@ -7,8 +7,7 @@ public class ShipSpawner : MonoBehaviour {
     public GameObject shipSpawnPoint;
     public GameObject[] shipsInScene;
 
-    public float difficultyChangeInterval = 20f;
-    public bool waitingToRaiseDifficulty = false;
+    public float shipSpawnRate = 5f;
 
     public int maxShips;
     public bool waitingForNextShipToSpawn = false;
@@ -20,21 +19,11 @@ public class ShipSpawner : MonoBehaviour {
                 StartCoroutine("SpawnShip");
             }
         }
-        if (waitingToRaiseDifficulty == false) {
-            StartCoroutine("RaiseDifficulty");
-        }
     }
     IEnumerator SpawnShip() {
         waitingForNextShipToSpawn = true;
         Instantiate(shipToBeSpawned, shipSpawnPoint.transform);
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(shipSpawnRate);
         waitingForNextShipToSpawn = false;
-    }
-
-    IEnumerator RaiseDifficulty() {
-        waitingToRaiseDifficulty = true;
-        maxShips = maxShips + 1;
-        yield return new WaitForSeconds(difficultyChangeInterval);
-        waitingToRaiseDifficulty = false;
     }
 }

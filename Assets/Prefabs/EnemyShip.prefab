@@ -2253,6 +2253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96e9bfb073c8a94a8b3c275c833bbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipValue: 23
+  gM: {fileID: 0}
   takeHitParticle: {fileID: 540236732857132784, guid: 82234e7ad71ea7e4eaacf7a94b21a8a1, type: 3}
   impactParticleDuration: 5
   hP: 100

@@ -54,6 +54,7 @@ public class UIFW : MonoBehaviour {
 
     public void ShipSelectedStart(GameObject endShip) {
         lineEndPointGO = endShip;  //set line end at ship we clicked
+        //HERE: IF LINE HAS ALREADY BEEN INSTANTIATED DO NOT INSTANTIATE NEW ONE?
         lineStartPointGO.GetComponent<TargetLineHandler>().instantiateNewLine(lineStartPointGO, lineEndPointGO);
 
         mouseUIParent.SetActive(false);

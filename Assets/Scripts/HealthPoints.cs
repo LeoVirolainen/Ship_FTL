@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class HealthPoints : MonoBehaviour {
 
+    public int shipValue; //how much gp the player gets when destroyed
+    public GameManager gM;
+
     public GameObject takeHitParticle;
     public float impactParticleDuration;
 
     public int hP;
 
-
+    private void Start() {
+        gM = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
     public void TakeDamage(int damage, float reloadTime) {
 
         StartCoroutine("PlayImpactSFX");
@@ -24,6 +29,9 @@ public class HealthPoints : MonoBehaviour {
 
         hP = hP - damage;
         if (hP <= 0) {
+            if (tag == "EnemyShip") {
+                gM.goldPieces = gM.goldPieces + shipValue;
+            }
             Destroy(gameObject, 1f);
         }
     }

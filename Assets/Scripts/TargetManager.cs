@@ -25,11 +25,8 @@ public class TargetManager : MonoBehaviour {
         uIScript = GameObject.Find("UIManager").GetComponent<UIFW>();
     }
 
-    private void OnMouseDown() {
-        clickScript.selectedTargetForPCannon = gameObject;
-        clickScript.ClickedOnShip();
-
-        uIScript.ShipSelectedStart(gameObject);
+    private void OnMouseDown() { //delegate all click tasks to MouseInputFW
+        clickScript.ClickedOnShip(gameObject);
     }
 
     private void Update() {
