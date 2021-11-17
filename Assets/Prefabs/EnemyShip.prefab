@@ -2255,9 +2255,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipValue: 23
   gM: {fileID: 0}
+  cM: {fileID: 0}
   takeHitParticle: {fileID: 540236732857132784, guid: 82234e7ad71ea7e4eaacf7a94b21a8a1, type: 3}
   impactParticleDuration: 5
-  hP: 100
+  currentHp: 100
+  maxHp: 0
+  LoadTimeMultiplier: 30
 --- !u!114 &7588608209196671370
 MonoBehaviour:
   m_ObjectHideFlags: 0

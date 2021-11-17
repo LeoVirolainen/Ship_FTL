@@ -8,12 +8,17 @@ N O T E S
 			UI icon for selected/active cannon
 			include targeting reticle for selected ship in white line
 			show valid ship target (snap? make line go green from red)
+			
+			show cannon range onmouseover
+			show ship range onmouseover
+
 		GAME:	
 DONE		automatic ship target seeking/selection + scouting interval float
 			(disable unlimited range on PCannon?)
+			support multiple ship types to spawn
 
 	UPCOMING:
-		cannon crews take damage -> less crew = slower loading
+DONE	cannon crews take damage -> less crew = slower loading
 DONE	get money from killing ships
 		use money to hire more crews
 			new crews get shipped in with a destructible barge

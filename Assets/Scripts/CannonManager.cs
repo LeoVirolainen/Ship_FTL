@@ -18,7 +18,7 @@ public class CannonManager : MonoBehaviour {
     public TargetManager targetingScript;
 
     public float loadTime = 2f;
-    public int damageOutput = 33;
+    public float damageOutput = 33;
     public float rangeOfGuns = 80f;
 
     private float timeWhenLoaded;

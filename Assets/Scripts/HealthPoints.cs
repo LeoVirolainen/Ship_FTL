@@ -7,15 +7,22 @@ public class HealthPoints : MonoBehaviour {
     public int shipValue; //how much gp the player gets when destroyed
     public GameManager gM;
 
+    public CannonManager cM;
+
     public GameObject takeHitParticle;
     public float impactParticleDuration;
 
-    public int hP;
+    public float currentHp = 100;
+    public float maxHp;
+    public float LoadTimeMultiplier = 30;
 
     private void Start() {
         gM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        cM = gameObject.GetComponent<CannonManager>();
+        maxHp = currentHp;
     }
-    public void TakeDamage(int damage, float reloadTime) {
+
+    public void TakeDamage(float damage, float reloadTime) {
 
         StartCoroutine("PlayImpactSFX");
 
@@ -27,8 +34,12 @@ public class HealthPoints : MonoBehaviour {
         ParticleSystemofNewImpactEffect.Play();
         Destroy(newImpactEffect, impactParticleDuration);
 
-        hP = hP - damage;
-        if (hP <= 0) {
+        currentHp = currentHp - damage;
+        //below: make PCannons' loadtime dependent on remaining HP
+        if (tag == "PlayerCannon") {
+            cM.loadTime = cM.loadTime + ((maxHp - currentHp) / LoadTimeMultiplier);
+        }
+        if (currentHp <= 0) {
             if (tag == "EnemyShip") {
                 gM.goldPieces = gM.goldPieces + shipValue;
             }

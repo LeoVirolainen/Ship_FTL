@@ -28,15 +28,17 @@ public class TargetLineHandler : MonoBehaviour {
         }
         if (lineHasBeenMade == true) {
             if (instantiatedLineParent != null) {
-                LineRenderer currentLine = instantiatedLineParent.GetComponentInChildren<LineRenderer>();
+                if (lineEndObj != null) {
+                    LineRenderer currentLine = instantiatedLineParent.GetComponentInChildren<LineRenderer>();
 
-                l_lineStartPt = lineStartObj.transform.position;
-                l_lineEndPt = lineEndObj.transform.position;
+                    l_lineStartPt = lineStartObj.transform.position;
+                    l_lineEndPt = lineEndObj.transform.position;
 
-                currentLine.SetPosition(0, l_lineStartPt);
-                currentLine.SetPosition(1, l_lineEndPt);
-                if (lineIsNowVisible == false) {
-                    instantiatedLineParent.SetActive(true);
+                    currentLine.SetPosition(0, l_lineStartPt);
+                    currentLine.SetPosition(1, l_lineEndPt);
+                    if (lineIsNowVisible == false) {
+                        instantiatedLineParent.SetActive(true);
+                    }
                 }
             } else {
                 lineHasBeenMade = false;
@@ -48,7 +50,7 @@ public class TargetLineHandler : MonoBehaviour {
         lineStartObj = myCannonScript.muzzleTransform;
         GameObject newInstantiatedGO = Instantiate(lineGraphicsPrefab, lineStartObj.transform);
         instantiatedLineParent = newInstantiatedGO;
-        LineRenderer newLine = newInstantiatedGO.GetComponent<LineRenderer>();        
+        LineRenderer newLine = newInstantiatedGO.GetComponent<LineRenderer>();
 
         lineStartObj = lineStartPt;
         lineEndObj = lineEndPt;
