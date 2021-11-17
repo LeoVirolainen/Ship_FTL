@@ -3,49 +3,94 @@ N O T E S
 
 -	-	-	-	-	-	-	-	-	-	-
 
-	TO DO:
-		UI:
-			UI icon for selected/active cannon
-			include targeting reticle for selected ship in white line
-			show valid ship target (snap? make line go green from red)
-			
-			show cannon range onmouseover
-			show ship range onmouseover
+	PANIK PRIORITY:
+		ACCESSIBILITY:
+			destruction effect for ships
+			UI event for selected/active cannon
+			include targeting reticle also for selected ship in white line
+			show valid ship target on mouseover (snap? make line go green from red)
+			change target selection to press+hold
+			click flashes cannon range as cylinder + possible active target
+			click flashes ship range as cylinder
+			Show ! icon on targetless cannon
+			show cannonballs?
+			loading timer graphics
 
 		GAME:	
-DONE		automatic ship target seeking/selection + scouting interval float
 			(disable unlimited range on PCannon?)
 			support multiple ship types to spawn
 
-	UPCOMING:
-DONE	cannon crews take damage -> less crew = slower loading
-DONE	get money from killing ships
-		use money to hire more crews
+	NECESSITIES:
+		Cannon health visualized as amount of crewmen
+
+	GOOD-TO-HAVE:
+		crew reinforcements arriving and walking handled in its own independent object and script -> tells reinforceable cannonStation to do CrewReinforced() when timely
 			new crews get shipped in with a destructible barge
-		
-DONE	ship muzzle flash towards enemy
-		only fire if shipSideTowardsCannon == true
-			make ship want to turn its side to cannon when in range
-
-		wind; a small force that turns rotation every now and then and lightly pushes all ships into one direction to add a random element
-
-		local scoreboard with 3-letter names :D
-
-		AI has budget (e.g. 3; smol ship = .5gp, big ship = 1gp: 3 big / 6 small / 2 big 2 small)
-			how to decide what AI spawns? random? cooldown for each ship to spawn?
-		AI measures player's threat level and scales its own budget according to that
-		AI budget has small extra variable that is added to budget and scales over time (to make failure inevitable at some point)
+		local scoreboard with 3-letter names :D		
+		Ships have direction vector to next destination -> move faster towards destination the closer they are to facing forward toward dest
 
 	FIXES/OPTIMIZATIONS:
 		Don’t hide distancetotarget in code, make it public var
-			Ships have cannon range based on ship scale -> smaller ships want closer and bigger ships stay back
-		Ships have direction vector to next destination -> move faster towards destination the closer they are to facing forward toward dest
+			Ships have cannon range based on ship scale -> smaller ships want closer and bigger ships stay back		
 		Separate UI from game logic
 		Use enums to determine faction of target(s) (maybe don’t use tags)
 		Make game more approachable
 
-	NICE TO HAVE:
-		loading timer graphics
-		active target graphics
-		JUICE:
-			destruction effect for ship and cannon
+	NICE-TO-HAVE:
+		wind; a small force that turns rotation every now and then and lightly pushes all ships into one direction to add a random element		
+		make ship want to turn its side to cannon when in range	
+			only fire if shipSideTowardsCannon == true	
+		AI has budget (e.g. 3; smol ship = .5gp, big ship = 1gp: 3 big / 6 small / 2 big 2 small)
+			AI measures player's threat level and scales its own budget according to that
+			how to decide what AI spawns? random? cooldown for each type of ship to spawn?
+			AI budget has small extra variable that is added to budget and scales over time (to make failure inevitable at some point)
+
+	PSEUDO-CODE PLANS
+		(this script in cannon parent, "Station")
+		Cannon HP visualization as crew: "CannonCrew" (.cs)
+			public ints crewHealth & maxCrewHealth (in start maxCrewHealth = crewHealth)
+			
+			in HPScript.takeDamage(), call crewScript.CrewDamaged()
+
+			//only decreases amount of visible GOs when is hit -- how to restore?
+			CrewDamaged()
+		!!! THESE MUST BE ordered so that what we end up with is the right crewHealth value. hierarchy needed? start from lowest number
+		!!! I THINK CREWHEALTH NEEDS TO BE "CREWDAMAGE" INSTEAD, FOR THE FOR-LOOP TO WORK AS INTENDED
+				if currentHP >= ((maxHP / 4) * 3)	(so if current hp = higher than 75%)
+					set crewHealth to 0
+				if currentHP >= maxHP / 2			(so if current hp = higher than 50%)
+					set crewHealth to 1
+				if currentHP >= maxHP / 4			(so if current hp = higher than 25%)
+					set crewHealth to 2
+				if currentHP <= maxHP / 4			(so if current hp = lower than 25%)
+					set crewHealth to 3
+				if currentHP <= 0					(so if current hp <= 0)
+					set crewHealth to 4
+				
+				for (int i = 0; i < crewhealth; ++i)
+					crewArray[i].meshRenderer.isActive = false; //OR basically just a death animation that does !meshRenderer at end
+
+				if (crewHealth == 4) { 
+			CannonWiped()
+			}
+			
+			CannonWiped() {
+			Station.GameObject.FindObjectsInChildren("PCannonTransform").SetActive(false)
+			}
+
+		(this needs to be in its own object (cannon's parent? NEED NEW PARENT FOR THIS TO WORK :d CALL NEW PARENT "PCannonStation")
+		CrewReinforced() { (only allows 100% restoration, but should work for now)
+
+			StationToReinforce = the station you clicked before clicking "reinforce!"
+				if (StationToReinforce.GameObject.FindObjectsInChildren("PCannonTransform") "is not active") //if the TransformGO is not active, make it active
+					StationToReinforce.GameObject.FindObjectsInChildren("PCannonTransform").SetActive(true)
+					//make all crewmen visible
+				foreach(GameObject crewman in StationToReinforce.CrewScript.crewArray) {
+					crewman.meshRenderer.isActive = true;	
+					//set max crew Health
+					StationToReinforce.GetComponent<CannonCrew>().crewHealth = maxCrewHealth;
+					//set max HP
+					StationToReinforce.GameObject.FindObjectsInChildren("PCannonTransform").GetComponent<HealthPoints>().hP = 
+					StationToReinforce.GameObject.FindObjectsInChildren("PCannonTransform").GetComponent<HealthPoints>().maxhP;				
+				}
+			}

@@ -2282,7 +2282,7 @@ MonoBehaviour:
   targetingScript: {fileID: 0}
   loadTime: 2
   damageOutput: 10
-  rangeOfGuns: 120
+  rangeOfGuns: 100
 --- !u!114 &7588608209196671373
 MonoBehaviour:
   m_ObjectHideFlags: 0

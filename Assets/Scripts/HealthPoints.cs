@@ -14,7 +14,7 @@ public class HealthPoints : MonoBehaviour {
 
     public float currentHp = 100;
     public float maxHp;
-    public float LoadTimeMultiplier = 30;
+    public float LoadTimeMultiplier = 40;
 
     private void Start() {
         gM = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -37,10 +37,12 @@ public class HealthPoints : MonoBehaviour {
         currentHp = currentHp - damage;
         //below: make PCannons' loadtime dependent on remaining HP
         if (tag == "PlayerCannon") {
+            //below we get a number to add to load time when HP decreases.
+            //LoadTimeMultiplier: something in the tens, bigger number = less punishing
             cM.loadTime = cM.loadTime + ((maxHp - currentHp) / LoadTimeMultiplier);
         }
         if (currentHp <= 0) {
-            if (tag == "EnemyShip") {
+            if (tag == "EnemyShip") { //if this is a ship, give player GP when this dies
                 gM.goldPieces = gM.goldPieces + shipValue;
             }
             Destroy(gameObject, 1f);

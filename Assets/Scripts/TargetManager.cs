@@ -30,11 +30,9 @@ public class TargetManager : MonoBehaviour {
     }
 
     private void Update() {
-        //if (Input.GetKeyDown(seekTargetKey)) {
             if (waitingToScoutAgain == false) {
                 StartCoroutine("FindBestTarget");
             }
-        //}
         //check if close enough to fire
         if (distanceToTarget <= myCannonScript.rangeOfGuns) {
             CloseEnoughToFire = true;
@@ -43,16 +41,16 @@ public class TargetManager : MonoBehaviour {
         }
     }
 
-    IEnumerator FindBestTarget() { //add available PCannon to array --- measure distance to first cannon in array
+    IEnumerator FindBestTarget() { //add available PCannons to array --- measure new distance to first cannon in array
         waitingToScoutAgain = true;
         enemyTargets = GameObject.FindGameObjectsWithTag("PlayerCannon");
-        myCannonScript.targetedGO = enemyTargets[0];
+        myCannonScript.targetedGO = enemyTargets[0]; //FAILSAFE: set first member of array as target
         distanceToTarget = Vector3.Distance(gameObject.transform.position, enemyTargets[0].transform.position);
-        print("measured dist to first cannon");
+        print(gameObject.name + "'s dist to target: " + distanceToTarget);
 
         for (int i = 1; i < enemyTargets.Length; ++i) { //Go through the list of previously found cannon --- Find nearest cannon and set as target
             float nextCannonDist = Vector3.Distance(gameObject.transform.position, enemyTargets[i].transform.position);
-            print("measured distance to next cannon");
+            print(gameObject.name + "'s dist to target: " + distanceToTarget);
             if (nextCannonDist < distanceToTarget) {
                 distanceToTarget = nextCannonDist;
                 print(distanceToTarget);

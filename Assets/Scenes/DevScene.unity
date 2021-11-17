@@ -2294,6 +2294,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5753406724678597537, guid: e792ea521e7ca4d4c88a2dfc86a790e8, type: 3}
+      propertyPath: LoadTimeMultiplier
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5753406724678597542, guid: e792ea521e7ca4d4c88a2dfc86a790e8, type: 3}
       propertyPath: m_Name
       value: PCannonTransform (1)
@@ -2790,9 +2794,17 @@ PrefabInstance:
       propertyPath: currentHp
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5753406724678597537, guid: e792ea521e7ca4d4c88a2dfc86a790e8, type: 3}
+      propertyPath: LoadTimeMultiplier
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5753406724678597542, guid: e792ea521e7ca4d4c88a2dfc86a790e8, type: 3}
       propertyPath: m_Name
       value: PCannonTransform
+      objectReference: {fileID: 0}
+    - target: {fileID: 5753406724678597542, guid: e792ea521e7ca4d4c88a2dfc86a790e8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e792ea521e7ca4d4c88a2dfc86a790e8, type: 3}
