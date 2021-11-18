@@ -9,6 +9,8 @@ public class HealthPoints : MonoBehaviour {
 
     public CannonManager cM;
 
+    public CannonCrew cC;
+
     public GameObject takeHitParticle;
     public float impactParticleDuration;
 
@@ -20,6 +22,12 @@ public class HealthPoints : MonoBehaviour {
         gM = GameObject.Find("GameManager").GetComponent<GameManager>();
         cM = gameObject.GetComponent<CannonManager>();
         maxHp = currentHp;
+
+        if (tag == "PlayerCannon") {
+            cC = GetComponentInParent<CannonCrew>();
+        } else {
+            cC = null;
+        }
     }
 
     public void TakeDamage(float damage, float reloadTime) {
@@ -40,12 +48,14 @@ public class HealthPoints : MonoBehaviour {
             //below we get a number to add to load time when HP decreases.
             //LoadTimeMultiplier: something in the tens, bigger number = less punishing
             cM.loadTime = cM.loadTime + ((maxHp - currentHp) / LoadTimeMultiplier);
+            //tell CannonCrew script that we got hit
+            cC.CrewDamaged();
         }
         if (currentHp <= 0) {
-            if (tag == "EnemyShip") { //if this is a ship, give player GP when this dies
+            if (tag == "EnemyShip") { //if this is a ship, give player GP and destroy this
                 gM.goldPieces = gM.goldPieces + shipValue;
+                Destroy(gameObject, 1f);
             }
-            Destroy(gameObject, 1f);
         }
     }
 
