@@ -7,6 +7,7 @@ TagManager:
   - PlayerCannon
   - EnemyShip
   - FortProximity
+  - UIGraphics
   layers:
   - Default
   - TransparentFX

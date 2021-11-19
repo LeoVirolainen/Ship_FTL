@@ -7,7 +7,7 @@ public class ShipDestination : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (shipMoveScript != null) {
-            if (other == shipMoveScript.gameObject.GetComponent<CapsuleCollider>()) {
+            if (other == shipMoveScript.gameObject.GetComponent<CapsuleCollider>()) { //check if collider is MY ship
                 shipMoveScript.hasDestination = false;
                 Destroy(gameObject);
             }

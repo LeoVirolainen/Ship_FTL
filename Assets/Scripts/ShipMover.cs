@@ -9,6 +9,7 @@ public class ShipMover : MonoBehaviour {
     public NavMeshAgent myAgent;
 
     public GameObject destinationCol;
+    public GameObject newDestinationObject;
 
     public HealthPoints myHp;
     public float myHpAtStart;
@@ -26,7 +27,7 @@ public class ShipMover : MonoBehaviour {
             if (myHp.currentHp > (myHpAtStart / 2)) {
                 destination = new Vector3(Random.Range(60, -70), 0, Random.Range(0, -30));
             } else { destination = new Vector3(Random.Range(100, -100), 0, Random.Range(-40, -100)); }
-            GameObject newDestinationObject = Instantiate(destinationCol, destination, /*this is just "no rotation" >*/ Quaternion.identity);
+            newDestinationObject = Instantiate(destinationCol, destination, /*this is just "no rotation" ->*/ Quaternion.identity);
             ShipDestination scriptOfDestObject = newDestinationObject.GetComponent<ShipDestination>();
             scriptOfDestObject.shipMoveScript = gameObject.GetComponent<ShipMover>();
             myAgent.SetDestination(destination);

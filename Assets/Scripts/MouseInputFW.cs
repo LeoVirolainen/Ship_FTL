@@ -8,11 +8,28 @@ public class MouseInputFW : MonoBehaviour {
 
     public UIFW uIScript;
 
+    public GameObject vfxForSelectedCannon;
+    public GameObject instantiatedSelectionVFX;
+
     private void Start() {
         uIScript = GameObject.Find("UIManager").GetComponent<UIFW>();
     }
 
+   /* private void Update() {
+        if (Input.GetKeyDown(KeyCode.Mouse1)) {
+            GameObject[] hideableUIElements = GameObject.FindGameObjectsWithTag("UIGraphics");
+            foreach (GameObject uiElement in hideableUIElements) {
+                Destroy(gameObject);
+            }
+        }
+    }*/
+
     public void ClickedOnPCannon(GameObject clickedCannon) {
+        if (instantiatedSelectionVFX != null) { //destroy previous VFX
+            Destroy(instantiatedSelectionVFX);
+        }
+        instantiatedSelectionVFX = Instantiate(vfxForSelectedCannon, clickedCannon.transform.position + new Vector3(0, 1, 0), Quaternion.identity);        
+
         selectedPCannon = clickedCannon;
         print("You clicked a cannon!");
         //Make selected cannon find all enemy ships

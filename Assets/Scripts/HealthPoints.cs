@@ -18,6 +18,8 @@ public class HealthPoints : MonoBehaviour {
     public float maxHp;
     public float LoadTimeMultiplier = 40;
 
+    public bool goldHasBeenGiven = false;
+
     private void Start() {
         gM = GameObject.Find("GameManager").GetComponent<GameManager>();
         cM = gameObject.GetComponent<CannonManager>();
@@ -31,8 +33,9 @@ public class HealthPoints : MonoBehaviour {
     }
 
     public void TakeDamage(float damage, float reloadTime) {
-
-        StartCoroutine("PlayImpactSFX");
+        //if (GetComponent<CannonManager>().targetedGO != null && GetComponent<CannonManager>().targetedGO.activeSelf == true) {
+            StartCoroutine("PlayImpactSFX");
+        //}
 
         GameObject newImpactEffect = Instantiate(takeHitParticle, gameObject.transform);
         ParticleSystem ParticleSystemofNewImpactEffect = newImpactEffect.gameObject.GetComponent<ParticleSystem>();
@@ -42,7 +45,11 @@ public class HealthPoints : MonoBehaviour {
         ParticleSystemofNewImpactEffect.Play();
         Destroy(newImpactEffect, impactParticleDuration);
 
-        currentHp = currentHp - damage;
+        if (currentHp > 0) {
+            currentHp = currentHp - damage;
+        } else if (currentHp < 0) {
+            currentHp = 0;
+        }
         //below: make PCannons' loadtime dependent on remaining HP
         if (tag == "PlayerCannon") {
             //below we get a number to add to load time when HP decreases.
@@ -53,7 +60,11 @@ public class HealthPoints : MonoBehaviour {
         }
         if (currentHp <= 0) {
             if (tag == "EnemyShip") { //if this is a ship, give player GP and destroy this
-                gM.goldPieces = gM.goldPieces + shipValue;
+                if (goldHasBeenGiven == false) {
+                    gM.goldPieces = gM.goldPieces + shipValue;
+                    goldHasBeenGiven = true;
+                }
+                Destroy(GetComponent<ShipMover>().newDestinationObject);
                 Destroy(gameObject, 1f);
             }
         }

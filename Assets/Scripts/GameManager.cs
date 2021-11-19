@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour {
     public ShipSpawner spawnerScript;
     public float fastestSpawnRate = 1f;
 
+    public int absoluteMaxShipsAtHardest = 6;
+
 
     void Start() {
         spawnerScript = GameObject.Find("ShipSpawner").GetComponent<ShipSpawner>();
@@ -27,9 +29,11 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator RaiseDifficulty() {
         waitingToRaiseDifficulty = true;
-        spawnerScript.maxShips = spawnerScript.maxShips + 1;
+        if (spawnerScript.maxShips < absoluteMaxShipsAtHardest) {
+            spawnerScript.maxShips = spawnerScript.maxShips + 1;
+        }
         if (spawnerScript.shipSpawnRate >= fastestSpawnRate)
-        spawnerScript.shipSpawnRate = spawnerScript.shipSpawnRate - 0.3f;
+            spawnerScript.shipSpawnRate = spawnerScript.shipSpawnRate - 0.3f;
         yield return new WaitForSeconds(difficultyChangeInterval);
         waitingToRaiseDifficulty = false;
     }

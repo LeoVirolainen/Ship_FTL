@@ -44,12 +44,17 @@ public class UIFW : MonoBehaviour {
         lineStartPointGO = startCannon; //set StartPointGO as the cannon we clicked
         if (mouseUIParent.activeSelf == true) {
             mouseUIParent.SetActive(false);
-        }       
+        }
 
         cursorObj = mouseUIParent.GetComponentInChildren<MeshRenderer>().gameObject;
         mouseLine = mouseUIParent.GetComponentInChildren<LineRenderer>();
 
         mouseUIParent.SetActive(true);  //make graphics visible
+
+        if (startCannon.GetComponent<TargetLineHandler>().instantiatedLineParent != null) {
+            startCannon.GetComponent<TargetLineHandler>().instantiatedLineParent.SetActive(false);
+            startCannon.GetComponent<TargetLineHandler>().instantiatedLineParent.SetActive(true);
+        }
     }
 
     public void ShipSelectedStart(GameObject endShip) {

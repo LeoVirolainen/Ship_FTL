@@ -37,64 +37,64 @@ public class CannonManager : MonoBehaviour {
             if (Time.time >= timeWhenLoaded) {
                 if (gameObject.tag == "EnemyShip") {
                     if (targetingScript.CloseEnoughToFire == true) {
-                        FireCannon();
+                        if (targetedGO.GetComponentInParent<CannonCrew>().stationHasBeenWiped == false) {
+                            FireCannon();
+                        }
                     }
                 } else {
                     FireCannon();
                 }
             }
-        } else {
-            //print(gameObject.name + "'S TARGET UNCLEAR");
         }
     }
 
     void FireCannon() {
-        if (targetedGO != null) {
-            print(gameObject.name + "'FIRES!'");
-            if (gameObject.tag == "PlayerCannon") {
-                AudioFW.Play("sfx_CannonFire");
-            } else {
-                AudioFW.Play("sfx_ShipCannonFire");
-            } //Spawn muzzle flashes
-            if (gameObject.tag == "EnemyShip") {
-                //make muzzletransform look at its target
-                muzzleTransform.transform.LookAt(targetedGO.transform.position);
-                GameObject newMuzzleEffect = Instantiate(muzzleParticleGO, muzzleTransform.transform);
-                ParticleSystem ParticleSystemOfNewMuzzleEffect = newMuzzleEffect.gameObject.GetComponent<ParticleSystem>();
-                ParticleSystemOfNewMuzzleEffect.Stop();
-                var MainOfNewMuzzleEffect = ParticleSystemOfNewMuzzleEffect.main;
-                MainOfNewMuzzleEffect.duration = loadTime;
-                ParticleSystemOfNewMuzzleEffect.Play();
-                Destroy(newMuzzleEffect, loadTime);
-
-            } else { //if tag is PlayerCannon
-                GameObject newMuzzleEffect = Instantiate(muzzleParticleGO, muzzleTransform.transform);
-                ParticleSystem ParticleSystemOfNewMuzzleEffect = newMuzzleEffect.gameObject.GetComponent<ParticleSystem>();
-                ParticleSystemOfNewMuzzleEffect.Stop();
-                var MainOfNewMuzzleEffect = ParticleSystemOfNewMuzzleEffect.main;
-                MainOfNewMuzzleEffect.duration = loadTime;
-                ParticleSystemOfNewMuzzleEffect.Play();
-                Destroy(newMuzzleEffect, loadTime);
-            }
-
-            //RANDOMIZE HIT OR NO HIT
-            if (gameObject.tag == "EnemyShip") {
-                targetHasBeenHit = (Random.value > (targetingScript.distanceToTarget / 100));
-                print(gameObject.name + targetingScript.distanceToTarget / 100);
-            } else {
-                targetHasBeenHit = (Random.value > 0.5f);
-            }
-
-            if (targetHasBeenHit == true) {
-                Debug.Log(gameObject.name + " HAS HIT ITS ENEMY!");
-                targetHpScript.TakeDamage(damageOutput, loadTime);
-            } else {
-                Debug.Log(gameObject.name + " MISSED!");
-            }
-
-            timeWhenLoaded = Time.time + loadTime;
+        print(gameObject.name + "'FIRES!'");
+        if (gameObject.tag == "PlayerCannon") {
+            AudioFW.Play("sfx_CannonFire");
+        } else {
+            AudioFW.Play("sfx_ShipCannonFire");
         }
+        //Spawn muzzle flashes
+        if (gameObject.tag == "EnemyShip") {
+            //make muzzletransform look at its target
+            muzzleTransform.transform.LookAt(targetedGO.transform.position);
+            GameObject newMuzzleEffect = Instantiate(muzzleParticleGO, muzzleTransform.transform);
+            ParticleSystem ParticleSystemOfNewMuzzleEffect = newMuzzleEffect.gameObject.GetComponent<ParticleSystem>();
+            ParticleSystemOfNewMuzzleEffect.Stop();
+            var MainOfNewMuzzleEffect = ParticleSystemOfNewMuzzleEffect.main;
+            MainOfNewMuzzleEffect.duration = loadTime;
+            ParticleSystemOfNewMuzzleEffect.Play();
+            Destroy(newMuzzleEffect, loadTime);
+
+        } else { //if tag is PlayerCannon
+            GameObject newMuzzleEffect = Instantiate(muzzleParticleGO, muzzleTransform.transform);
+            ParticleSystem ParticleSystemOfNewMuzzleEffect = newMuzzleEffect.gameObject.GetComponent<ParticleSystem>();
+            ParticleSystemOfNewMuzzleEffect.Stop();
+            var MainOfNewMuzzleEffect = ParticleSystemOfNewMuzzleEffect.main;
+            MainOfNewMuzzleEffect.duration = loadTime;
+            ParticleSystemOfNewMuzzleEffect.Play();
+            Destroy(newMuzzleEffect, loadTime);
+        }
+
+        //RANDOMIZE HIT OR NO HIT
+        if (gameObject.tag == "EnemyShip") {
+            targetHasBeenHit = (Random.value > (targetingScript.distanceToTarget / 100));
+            print(gameObject.name + targetingScript.distanceToTarget / 100);
+        } else {
+            targetHasBeenHit = (Random.value > 0.5f);
+        }
+
+        if (targetHasBeenHit == true) {
+            Debug.Log(gameObject.name + " HAS HIT ITS ENEMY!");
+            targetHpScript.TakeDamage(damageOutput, loadTime);
+        } else {
+            Debug.Log(gameObject.name + " MISSED!");
+        }
+
+        timeWhenLoaded = Time.time + loadTime;
     }
+
 
     public void AssignNewTargetHPScript() {
         targetHpScript = targetedGO.GetComponent<HealthPoints>();

@@ -7,9 +7,6 @@ public class PlayerTargetManager : MonoBehaviour {
     public CannonManager myCannonScript;
     public MouseInputFW clickScript;
 
-    //CONTROLS
-    public KeyCode seekTargetKey;
-
     //LOCAL VARIABLES
     public GameObject[] enemyTargets;
     [SerializeField] private bool hasTarget = false;

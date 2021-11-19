@@ -30,7 +30,7 @@ public class TargetManager : MonoBehaviour {
     }
 
     private void Update() {
-            if (waitingToScoutAgain == false) {
+            if (waitingToScoutAgain == false || myCannonScript.targetedGO.activeSelf == false) {
                 StartCoroutine("FindBestTarget");
             }
         //check if close enough to fire
@@ -52,9 +52,11 @@ public class TargetManager : MonoBehaviour {
             float nextCannonDist = Vector3.Distance(gameObject.transform.position, enemyTargets[i].transform.position);
             print(gameObject.name + "'s dist to target: " + distanceToTarget);
             if (nextCannonDist < distanceToTarget) {
-                distanceToTarget = nextCannonDist;
-                print(distanceToTarget);
-                myCannonScript.targetedGO = enemyTargets[i];
+                if (enemyTargets[i].activeSelf == true) {//check if new target candidate is toggled on
+                    distanceToTarget = nextCannonDist;
+                    print(distanceToTarget);
+                    myCannonScript.targetedGO = enemyTargets[i];
+                }
             }
         } //find HP script for new target cannon
         myCannonScript.AssignNewTargetHPScript();

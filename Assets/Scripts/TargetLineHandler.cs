@@ -57,6 +57,6 @@ public class TargetLineHandler : MonoBehaviour {
 
         lineHasBeenMade = true;
 
-        Destroy(instantiatedLineParent, 3f);
+        //Destroy(instantiatedLineParent, 3f);
     }
 }
