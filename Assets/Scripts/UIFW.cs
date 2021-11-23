@@ -57,6 +57,14 @@ public class UIFW : MonoBehaviour {
         }
     }
 
+    public void ShipHoverStart(GameObject shipUnderMouse) {
+        lineEndPointGO = shipUnderMouse;
+    }
+
+    public void ShipHoverEnd(GameObject shipUnderMouse) {
+        lineEndPointGO = null;
+    }
+
     public void ShipSelectedStart(GameObject endShip) {
         lineEndPointGO = endShip;  //set line end at ship we clicked
         //HERE: IF LINE HAS ALREADY BEEN INSTANTIATED DO NOT INSTANTIATE NEW ONE?

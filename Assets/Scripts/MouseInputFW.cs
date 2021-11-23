@@ -15,15 +15,6 @@ public class MouseInputFW : MonoBehaviour {
         uIScript = GameObject.Find("UIManager").GetComponent<UIFW>();
     }
 
-   /* private void Update() {
-        if (Input.GetKeyDown(KeyCode.Mouse1)) {
-            GameObject[] hideableUIElements = GameObject.FindGameObjectsWithTag("UIGraphics");
-            foreach (GameObject uiElement in hideableUIElements) {
-                Destroy(gameObject);
-            }
-        }
-    }*/
-
     public void ClickedOnPCannon(GameObject clickedCannon) {
         if (instantiatedSelectionVFX != null) { //destroy previous VFX
             Destroy(instantiatedSelectionVFX);
@@ -46,5 +37,17 @@ public class MouseInputFW : MonoBehaviour {
         selectedPCannon.GetComponent<PlayerTargetManager>().FindTarget();
 
         uIScript.ShipSelectedStart(clickedAgent);
+    }
+
+    public void MouseOverShip(GameObject shipUnderMouse, GameObject rangeCyl) {
+        rangeCyl.GetComponent<Animator>().Play("Intro");
+
+        uIScript.ShipHoverStart(shipUnderMouse);
+    }
+
+    public void MouseExitShip(GameObject shipUnderMouse, GameObject rangeCyl) {
+        rangeCyl.GetComponent<Animator>().Play("Outro");
+
+        uIScript.ShipHoverEnd(shipUnderMouse);
     }
 }

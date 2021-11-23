@@ -21,7 +21,7 @@ public class CannonManager : MonoBehaviour {
     public float damageOutput = 33;
     public float rangeOfGuns = 80f;
 
-    private float timeWhenLoaded;
+    public float timeWhenLoaded;
 
     private void Start() {
         if (gameObject.tag == "EnemyShip") {
@@ -42,13 +42,15 @@ public class CannonManager : MonoBehaviour {
                         }
                     }
                 } else {
-                    FireCannon();
+                    if (GetComponentInParent<CannonCrew>().stationHasBeenWiped == false) {
+                        FireCannon();
+                    }
                 }
             }
         }
     }
 
-    void FireCannon() {
+    public void FireCannon() {
         print(gameObject.name + "'FIRES!'");
         if (gameObject.tag == "PlayerCannon") {
             AudioFW.Play("sfx_CannonFire");

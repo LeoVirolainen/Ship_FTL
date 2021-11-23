@@ -19,14 +19,25 @@ public class TargetManager : MonoBehaviour {
     public bool waitingToScoutAgain = false;
     public float scoutingInterval;
 
+    public GameObject rangeCylinder;
+
     private void Start() {
         myCannonScript = gameObject.GetComponent<CannonManager>();
         clickScript = GameObject.Find("MouseInputFW").GetComponent<MouseInputFW>();
         uIScript = GameObject.Find("UIManager").GetComponent<UIFW>();
+        rangeCylinder = GetComponentInChildren<ShipRangeCylinderControl>().gameObject;
     }
 
     private void OnMouseDown() { //delegate all click tasks to MouseInputFW
         clickScript.ClickedOnShip(gameObject);
+    }
+
+    private void OnMouseEnter() {
+        clickScript.MouseOverShip(gameObject, rangeCylinder);
+    }
+
+    private void OnMouseExit() {
+        clickScript.MouseExitShip(gameObject, rangeCylinder);
     }
 
     private void Update() {

@@ -140,6 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6664520461048462565}
   - component: {fileID: 6664520461048462566}
+  - component: {fileID: 4954349562919376725}
   m_Layer: 0
   m_Name: SelectedObjVFX
   m_TagString: UIGraphics
@@ -170,6 +171,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6664520461048462560}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!111 &4954349562919376725
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6664520461048462560}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 6841e899bd534ac4bb5e1d5caee6fd3b, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 6841e899bd534ac4bb5e1d5caee6fd3b, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &6664520461464654856
 GameObject:
   m_ObjectHideFlags: 0

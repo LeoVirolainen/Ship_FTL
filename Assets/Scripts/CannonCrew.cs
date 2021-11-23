@@ -50,6 +50,7 @@ public class CannonCrew : MonoBehaviour {
             } //OR basically just a death animation that does !meshRenderer at end
         }
     }
+
     //Turn my child PCannonTransform off at 0 HP
     public void CannonWiped() {
         foreach (GameObject crewman in crewArray) {
@@ -62,10 +63,9 @@ public class CannonCrew : MonoBehaviour {
     //This is to be triggered outside this script - clickscript tells reinforcer/globalCrew script who has been clicked? tell that cannoon to do CrewReinforced()
     public void CrewReinforced() { //(only allows 100% restoration, but should work for now)
         stationHasBeenWiped = false;
-
+        hpScript.currentHp = hpScript.maxHp;        //restore cannon HP to max
         if (myCannon.activeSelf == false) {         //make sure the cannon is on
-            myCannon.SetActive(true);
-            hpScript.currentHp = hpScript.maxHp;    //restore cannon HP to max
+            myCannon.SetActive(true);            
         }
         crewDamage = 0; //nullify damage to crew
         foreach (GameObject crewman in crewArray) { //set crewmen visible again

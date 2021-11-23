@@ -4,24 +4,19 @@ N O T E S
 -	-	-	-	-	-	-	-	-	-	-
 
 	PANIK PRIORITY:
-		ACCESSIBILITY:
+		ACCESSIBILITY:			
 			destruction effect for ships
-			UI event for selected/active cannon
 			include targeting reticle also for selected ship in white line
 			show valid ship target on mouseover (snap? make line go green from red)
 			change target selection to press+hold
 			click flashes cannon range as cylinder + possible active target
-			click flashes ship range as cylinder
-			Show ! icon on targetless cannon
 			show cannonballs?
-			loading timer graphics
 
 		GAME:	
 			(disable unlimited range on PCannon?)
 			support multiple ship types to spawn
 
 	NECESSITIES:
-		Cannon health visualized as amount of crewmen
 
 	GOOD-TO-HAVE:
 		crew reinforcements arriving and walking handled in its own independent object and script -> tells reinforceable cannonStation to do CrewReinforced() when timely
@@ -30,6 +25,8 @@ N O T E S
 		Ships have direction vector to next destination -> move faster towards destination the closer they are to facing forward toward dest
 
 	FIXES/OPTIMIZATIONS:
+		INCREASE MAX RADIAL TO ACCOMMODATE LOADING TIME CHANGES
+
 		Don’t hide distancetotarget in code, make it public var
 			Ships have cannon range based on ship scale -> smaller ships want closer and bigger ships stay back		
 		Separate UI from game logic
