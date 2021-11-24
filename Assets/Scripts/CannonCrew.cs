@@ -11,8 +11,13 @@ public class CannonCrew : MonoBehaviour {
     public GameObject[] crewArray;
     public GameObject myCannon;
 
+    public CannonManager myCannonScript;
+    public GameOverChecker gameOverScript;
+
     private void Start() {
         hpScript = GetComponentInChildren<HealthPoints>();
+        myCannonScript = GetComponentInChildren<CannonManager>();
+        gameOverScript = GameObject.Find("GameManager").GetComponent<GameOverChecker>();
 
         myCannon = GetComponentInChildren<CannonManager>().gameObject;
     }
@@ -56,6 +61,7 @@ public class CannonCrew : MonoBehaviour {
         foreach (GameObject crewman in crewArray) {
             crewman.GetComponent<MeshRenderer>().enabled = false;
         }
+        gameOverScript.CheckPCannons();
         //myCannon.SetActive(false);
     }
 
@@ -64,6 +70,7 @@ public class CannonCrew : MonoBehaviour {
     public void CrewReinforced() { //(only allows 100% restoration, but should work for now)
         stationHasBeenWiped = false;
         hpScript.currentHp = hpScript.maxHp;        //restore cannon HP to max
+        myCannonScript.loadTime = myCannonScript.loadTimeWhenFullHealth; //restore full loadingTime
         if (myCannon.activeSelf == false) {         //make sure the cannon is on
             myCannon.SetActive(true);            
         }
@@ -71,6 +78,7 @@ public class CannonCrew : MonoBehaviour {
         foreach (GameObject crewman in crewArray) { //set crewmen visible again
             crewman.GetComponent<MeshRenderer>().enabled = true;            
         }
+        gameOverScript.CheckPCannons();
     }
 }
 

@@ -7,12 +7,14 @@ public class MouseInputFW : MonoBehaviour {
     public GameObject selectedTargetForPCannon;
 
     public UIFW uIScript;
+    public CursorGraphicsHandler cursorScript;
 
     public GameObject vfxForSelectedCannon;
     public GameObject instantiatedSelectionVFX;
 
     private void Start() {
         uIScript = GameObject.Find("UIManager").GetComponent<UIFW>();
+        cursorScript = GameObject.Find("UIManager").GetComponent<CursorGraphicsHandler>();
     }
 
     public void ClickedOnPCannon(GameObject clickedCannon) {
@@ -27,6 +29,8 @@ public class MouseInputFW : MonoBehaviour {
         selectedPCannon.GetComponent<PlayerTargetManager>().enemyTargets = GameObject.FindGameObjectsWithTag("EnemyShip");
 
         uIScript.CannonSelectedStart(clickedCannon);
+
+        //cursorScript.TargetStart();
     }
 
     public void ClickedOnShip(GameObject clickedAgent) {
@@ -37,6 +41,8 @@ public class MouseInputFW : MonoBehaviour {
         selectedPCannon.GetComponent<PlayerTargetManager>().FindTarget();
 
         uIScript.ShipSelectedStart(clickedAgent);
+
+        //cursorScript.TargetEnd();
     }
 
     public void MouseOverShip(GameObject shipUnderMouse, GameObject rangeCyl) {

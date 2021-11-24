@@ -6,8 +6,6 @@ N O T E S
 	PANIK PRIORITY:
 		ACCESSIBILITY:			
 			destruction effect for ships
-			include targeting reticle also for selected ship in white line
-			show valid ship target on mouseover (snap? make line go green from red)
 			change target selection to press+hold
 			click flashes cannon range as cylinder + possible active target
 			show cannonballs?
@@ -15,6 +13,7 @@ N O T E S
 		GAME:	
 			(disable unlimited range on PCannon?)
 			support multiple ship types to spawn
+			make crew reinforcement as: click on button -> click on cannon
 
 	NECESSITIES:
 
@@ -25,8 +24,6 @@ N O T E S
 		Ships have direction vector to next destination -> move faster towards destination the closer they are to facing forward toward dest
 
 	FIXES/OPTIMIZATIONS:
-		INCREASE MAX RADIAL TO ACCOMMODATE LOADING TIME CHANGES
-
 		Don’t hide distancetotarget in code, make it public var
 			Ships have cannon range based on ship scale -> smaller ships want closer and bigger ships stay back		
 		Separate UI from game logic
@@ -41,53 +38,3 @@ N O T E S
 			AI measures player's threat level and scales its own budget according to that
 			how to decide what AI spawns? random? cooldown for each type of ship to spawn?
 			AI budget has small extra variable that is added to budget and scales over time (to make failure inevitable at some point)
-
-	PSEUDO-CODE PLANS
-		(this script in cannon parent, "Station")
-		Cannon HP visualization as crew: "CannonCrew" (.cs)
-			public ints crewHealth & maxCrewHealth (in start maxCrewHealth = crewHealth)
-			
-			in HPScript.takeDamage(), call crewScript.CrewDamaged()
-
-			//only decreases amount of visible GOs when is hit -- how to restore?
-			CrewDamaged()
-		!!! THESE MUST BE ordered so that what we end up with is the right crewHealth value. hierarchy needed? start from lowest number
-		!!! I THINK CREWHEALTH NEEDS TO BE "CREWDAMAGE" INSTEAD, FOR THE FOR-LOOP TO WORK AS INTENDED
-				if currentHP >= ((maxHP / 4) * 3)	(so if current hp = higher than 75%)
-					set crewHealth to 0
-				if currentHP >= maxHP / 2			(so if current hp = higher than 50%)
-					set crewHealth to 1
-				if currentHP >= maxHP / 4			(so if current hp = higher than 25%)
-					set crewHealth to 2
-				if currentHP <= maxHP / 4			(so if current hp = lower than 25%)
-					set crewHealth to 3
-				if currentHP <= 0					(so if current hp <= 0)
-					set crewHealth to 4
-				
-				for (int i = 0; i < crewhealth; ++i)
-					crewArray[i].meshRenderer.isActive = false; //OR basically just a death animation that does !meshRenderer at end
-
-				if (crewHealth == 4) { 
-			CannonWiped()
-			}
-			
-			CannonWiped() {
-			Station.GameObject.FindObjectsInChildren("PCannonTransform").SetActive(false)
-			}
-
-		(this needs to be in its own object (cannon's parent? NEED NEW PARENT FOR THIS TO WORK :d CALL NEW PARENT "PCannonStation")
-		CrewReinforced() { (only allows 100% restoration, but should work for now)
-
-			StationToReinforce = the station you clicked before clicking "reinforce!"
-				if (StationToReinforce.GameObject.FindObjectsInChildren("PCannonTransform") "is not active") //if the TransformGO is not active, make it active
-					StationToReinforce.GameObject.FindObjectsInChildren("PCannonTransform").SetActive(true)
-					//make all crewmen visible
-				foreach(GameObject crewman in StationToReinforce.CrewScript.crewArray) {
-					crewman.meshRenderer.isActive = true;	
-					//set max crew Health
-					StationToReinforce.GetComponent<CannonCrew>().crewHealth = maxCrewHealth;
-					//set max HP
-					StationToReinforce.GameObject.FindObjectsInChildren("PCannonTransform").GetComponent<HealthPoints>().hP = 
-					StationToReinforce.GameObject.FindObjectsInChildren("PCannonTransform").GetComponent<HealthPoints>().maxhP;				
-				}
-			}

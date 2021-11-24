@@ -27,15 +27,17 @@ public class UIFW : MonoBehaviour {
 
             //make line end point be the cursor if no ship end point exists yet
             if (lineEndPointGO == null) {
-                lineEndPoint = cursorObj.transform.position; //set line end value at cursor 
+                lineEndPoint = cursorObj.transform.position + new Vector3(0, 50, 0); //set line end value at cursor 
+                cursorObj.transform.position = lineEndPoint;
+                cursorObj.SetActive(false);
             } else { //set line end at endGO
                 cursorObj.transform.position = lineEndPoint;
-                lineEndPoint = lineEndPointGO.transform.position;
+                lineEndPoint = lineEndPointGO.transform.position + new Vector3(0, 50, 0);
             }
 
             //Set line start and end coords
-            mouseLine.SetPosition(0, new Vector3(lineStartPoint.x, 10, lineStartPoint.z));
-            mouseLine.SetPosition(1, lineEndPoint);
+            mouseLine.SetPosition(0, new Vector3(lineStartPoint.x, 50, lineStartPoint.z));
+            mouseLine.SetPosition(1, new Vector3(lineEndPoint.x, 50, lineEndPoint.z));
         }
     }
 
@@ -45,11 +47,14 @@ public class UIFW : MonoBehaviour {
         if (mouseUIParent.activeSelf == true) {
             mouseUIParent.SetActive(false);
         }
-
-        cursorObj = mouseUIParent.GetComponentInChildren<MeshRenderer>().gameObject;
+        if (cursorObj == null) {
+            cursorObj = mouseUIParent.GetComponentInChildren<MeshRenderer>().gameObject;
+        }
+        cursorObj.SetActive(false);
         mouseLine = mouseUIParent.GetComponentInChildren<LineRenderer>();
 
         mouseUIParent.SetActive(true);  //make graphics visible
+        mouseLine.enabled = true;
 
         if (startCannon.GetComponent<TargetLineHandler>().instantiatedLineParent != null) {
             startCannon.GetComponent<TargetLineHandler>().instantiatedLineParent.SetActive(false);
@@ -58,11 +63,16 @@ public class UIFW : MonoBehaviour {
     }
 
     public void ShipHoverStart(GameObject shipUnderMouse) {
+        if (cursorObj == null) {
+            cursorObj = mouseUIParent.GetComponentInChildren<MeshRenderer>().gameObject;
+        }
         lineEndPointGO = shipUnderMouse;
+        cursorObj.SetActive(true);
     }
 
     public void ShipHoverEnd(GameObject shipUnderMouse) {
         lineEndPointGO = null;
+        cursorObj.SetActive(false);
     }
 
     public void ShipSelectedStart(GameObject endShip) {

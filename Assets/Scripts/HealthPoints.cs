@@ -11,6 +11,8 @@ public class HealthPoints : MonoBehaviour {
 
     public CannonCrew cC;
 
+    public PCannonUIHandler cUIh;
+
     public GameObject takeHitParticle;
     public float impactParticleDuration;
 
@@ -27,6 +29,7 @@ public class HealthPoints : MonoBehaviour {
 
         if (tag == "PlayerCannon") {
             cC = GetComponentInParent<CannonCrew>();
+            cUIh = GetComponentInChildren<PCannonUIHandler>();
         } else {
             cC = null;
         }
@@ -55,6 +58,7 @@ public class HealthPoints : MonoBehaviour {
             //below we get a number to add to load time when HP decreases.
             //LoadTimeMultiplier: something in the tens, bigger number = less punishing
             cM.loadTime = cM.loadTime + ((maxHp - currentHp) / LoadTimeMultiplier);
+            cUIh.maxRadial = cM.loadTime;
             //tell CannonCrew script that we got hit
             cC.CrewDamaged();
         }

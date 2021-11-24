@@ -63,7 +63,7 @@ public class TargetManager : MonoBehaviour {
             float nextCannonDist = Vector3.Distance(gameObject.transform.position, enemyTargets[i].transform.position);
             print(gameObject.name + "'s dist to target: " + distanceToTarget);
             if (nextCannonDist < distanceToTarget) {
-                if (enemyTargets[i].activeSelf == true) {//check if new target candidate is toggled on
+                if (enemyTargets[i].GetComponentInParent<CannonCrew>().stationHasBeenWiped == false) {//check if new target candidate is intact
                     distanceToTarget = nextCannonDist;
                     print(distanceToTarget);
                     myCannonScript.targetedGO = enemyTargets[i];

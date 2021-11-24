@@ -18,12 +18,14 @@ public class CannonManager : MonoBehaviour {
     public TargetManager targetingScript;
 
     public float loadTime = 2f;
+    public float loadTimeWhenFullHealth;
     public float damageOutput = 33;
     public float rangeOfGuns = 80f;
 
     public float timeWhenLoaded;
 
     private void Start() {
+        loadTimeWhenFullHealth = loadTime;
         if (gameObject.tag == "EnemyShip") {
             targetingScript = gameObject.GetComponent<TargetManager>();
         }
