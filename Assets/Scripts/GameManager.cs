@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public int goldPieces;
+    public int totalScore;
     public Text gpText;
+    public Text tsText;
 
     public float difficultyChangeInterval = 20f;
     public bool waitingToRaiseDifficulty = false;
@@ -18,9 +20,16 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
         spawnerScript = GameObject.Find("ShipSpawner").GetComponent<ShipSpawner>();
+        InvokeRepeating("CheckScore", 0.0f, 1f); //add 1 to score every second
     }
-    void Update() {
-        gpText.text = ("Rubles: " + goldPieces);
+
+    public void CheckScore() {
+        totalScore = totalScore + 1;
+    }
+
+    void FixedUpdate() {
+        gpText.text = "Rubles: " + goldPieces;
+        tsText.text = "SCORE: " + totalScore.ToString("0");
 
         if (waitingToRaiseDifficulty == false) {
             StartCoroutine("RaiseDifficulty");

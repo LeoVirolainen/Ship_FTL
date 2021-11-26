@@ -2374,6 +2374,7 @@ MonoBehaviour:
   gM: {fileID: 0}
   cM: {fileID: 0}
   cC: {fileID: 0}
+  cUIh: {fileID: 0}
   takeHitParticle: {fileID: 540236732857132784, guid: 82234e7ad71ea7e4eaacf7a94b21a8a1, type: 3}
   impactParticleDuration: 5
   currentHp: 100
@@ -2400,8 +2401,9 @@ MonoBehaviour:
   targetHpScript: {fileID: 0}
   targetingScript: {fileID: 0}
   loadTime: 2
+  loadTimeWhenFullHealth: 0
   damageOutput: 10
-  rangeOfGuns: 100
+  rangeOfGuns: 120
   timeWhenLoaded: 0
 --- !u!114 &7588608209196671373
 MonoBehaviour:

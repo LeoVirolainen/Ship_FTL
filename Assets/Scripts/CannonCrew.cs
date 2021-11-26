@@ -5,6 +5,7 @@ using UnityEngine;
 public class CannonCrew : MonoBehaviour {
     public int crewDamage;
     public bool stationHasBeenWiped = false;
+    public bool startAsWiped = false;
 
     public HealthPoints hpScript;
 
@@ -14,12 +15,22 @@ public class CannonCrew : MonoBehaviour {
     public CannonManager myCannonScript;
     public GameOverChecker gameOverScript;
 
-    private void Start() {
+    public void WipeAndStart() {
         hpScript = GetComponentInChildren<HealthPoints>();
         myCannonScript = GetComponentInChildren<CannonManager>();
         gameOverScript = GameObject.Find("GameManager").GetComponent<GameOverChecker>();
 
         myCannon = GetComponentInChildren<CannonManager>().gameObject;
+
+
+        if (startAsWiped == true) { //wipe cannon if so need be
+            foreach (GameObject crewman in crewArray) {
+                crewman.GetComponent<MeshRenderer>().enabled = false;
+            }
+            hpScript.currentHp = 0;
+            crewDamage = 4;
+            stationHasBeenWiped = true;
+        }
     }
 
     //decreases amount of visible GOs when is hit
@@ -56,7 +67,7 @@ public class CannonCrew : MonoBehaviour {
         }
     }
 
-    //Turn my child PCannonTransform off at 0 HP
+    //Turn my child crewmen off at 0 HP
     public void CannonWiped() {
         foreach (GameObject crewman in crewArray) {
             crewman.GetComponent<MeshRenderer>().enabled = false;

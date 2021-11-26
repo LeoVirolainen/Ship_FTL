@@ -6,6 +6,7 @@ N O T E S
 	PANIK PRIORITY:
 		ACCESSIBILITY:			
 			destruction effect for ships
+			water splash around ship when missing
 			change target selection to press+hold
 			click flashes cannon range as cylinder + possible active target
 			show cannonballs?
@@ -16,15 +17,15 @@ N O T E S
 			make crew reinforcement as: click on button -> click on cannon
 
 	NECESSITIES:
+		Ships have direction vector to next destination -> move faster towards destination the closer they are to facing forward toward dest
 
 	GOOD-TO-HAVE:
 		crew reinforcements arriving and walking handled in its own independent object and script -> tells reinforceable cannonStation to do CrewReinforced() when timely
 			new crews get shipped in with a destructible barge
-		local scoreboard with 3-letter names :D		
-		Ships have direction vector to next destination -> move faster towards destination the closer they are to facing forward toward dest
+		local scoreboard with 3-letter names :D				
 
 	FIXES/OPTIMIZATIONS:
-		Don’t hide distancetotarget in code, make it public var
+		Don’t hide distancetotarget in code, make it a public var
 			Ships have cannon range based on ship scale -> smaller ships want closer and bigger ships stay back		
 		Separate UI from game logic
 		Use enums to determine faction of target(s) (maybe don’t use tags)

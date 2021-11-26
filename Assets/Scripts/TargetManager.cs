@@ -45,7 +45,7 @@ public class TargetManager : MonoBehaviour {
                 StartCoroutine("FindBestTarget");
             }
         //check if close enough to fire
-        if (distanceToTarget <= myCannonScript.rangeOfGuns) {
+        if ((distanceToTarget * 2) <= myCannonScript.rangeOfGuns) {
             CloseEnoughToFire = true;
         } else {
             CloseEnoughToFire = false;

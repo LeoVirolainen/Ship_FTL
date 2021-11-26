@@ -18,7 +18,11 @@ public class GameOverChecker : MonoBehaviour {
         }
 
         if (totalHealth <= 0) {
-            print("game over! total score:" + GameObject.Find("GameManager").GetComponent<GameManager>().goldPieces);
+            GameOver();            
         }
+    }
+    public void GameOver() {
+        print("game over! total score:" + (GameObject.Find("GameManager").GetComponent<GameManager>().totalScore));
+        Time.timeScale = 0;
     }
 }

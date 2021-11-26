@@ -30,6 +30,7 @@ public class HealthPoints : MonoBehaviour {
         if (tag == "PlayerCannon") {
             cC = GetComponentInParent<CannonCrew>();
             cUIh = GetComponentInChildren<PCannonUIHandler>();
+            cC.WipeAndStart();
         } else {
             cC = null;
         }
@@ -66,6 +67,7 @@ public class HealthPoints : MonoBehaviour {
             if (tag == "EnemyShip") { //if this is a ship, give player GP and destroy this
                 if (goldHasBeenGiven == false) {
                     gM.goldPieces = gM.goldPieces + shipValue;
+                    gM.totalScore = gM.totalScore + shipValue;
                     goldHasBeenGiven = true;
                 }
                 Destroy(GetComponent<ShipMover>().newDestinationObject);
