@@ -7,6 +7,8 @@ public class ShipSpawner : MonoBehaviour {
     public GameObject shipSpawnPoint;
     public GameObject[] shipsInScene;
 
+    public GameObject[] shipOptions;
+
     public float shipSpawnRate = 5f;
 
     public int maxShips;
@@ -22,6 +24,11 @@ public class ShipSpawner : MonoBehaviour {
     }
     IEnumerator SpawnShip() {
         waitingForNextShipToSpawn = true;
+
+        //choose random ship
+        int shipSelectorInt = Random.Range(0, 3);
+        shipToBeSpawned = shipOptions[shipSelectorInt];
+
         Instantiate(shipToBeSpawned, shipSpawnPoint.transform);
         yield return new WaitForSeconds(shipSpawnRate);
         waitingForNextShipToSpawn = false;

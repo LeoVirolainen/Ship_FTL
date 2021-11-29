@@ -25,7 +25,7 @@ public class CannonCrew : MonoBehaviour {
 
         if (startAsWiped == true) { //wipe cannon if so need be
             foreach (GameObject crewman in crewArray) {
-                crewman.GetComponent<MeshRenderer>().enabled = false;
+                crewman.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
             }
             hpScript.currentHp = 0;
             crewDamage = 4;
@@ -62,7 +62,7 @@ public class CannonCrew : MonoBehaviour {
 
         if (crewDamage < 4) {
             for (int i = 0; i < crewDamage; ++i) {
-                crewArray[i].GetComponent<MeshRenderer>().enabled = false;
+                crewArray[i].GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
             } //OR basically just a death animation that does !meshRenderer at end
         }
     }
@@ -70,7 +70,7 @@ public class CannonCrew : MonoBehaviour {
     //Turn my child crewmen off at 0 HP
     public void CannonWiped() {
         foreach (GameObject crewman in crewArray) {
-            crewman.GetComponent<MeshRenderer>().enabled = false;
+            crewman.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
         }
         gameOverScript.CheckPCannons();
         //myCannon.SetActive(false);
@@ -87,7 +87,7 @@ public class CannonCrew : MonoBehaviour {
         }
         crewDamage = 0; //nullify damage to crew
         foreach (GameObject crewman in crewArray) { //set crewmen visible again
-            crewman.GetComponent<MeshRenderer>().enabled = true;            
+            crewman.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;            
         }
         gameOverScript.CheckPCannons();
     }
