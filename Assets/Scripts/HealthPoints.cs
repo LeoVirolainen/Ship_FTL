@@ -1,6 +1,8 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class HealthPoints : MonoBehaviour {
 
@@ -14,18 +16,23 @@ public class HealthPoints : MonoBehaviour {
     public PCannonUIHandler cUIh;
 
     public GameObject takeHitParticle;
-    public float impactParticleDuration;
 
+    public Animator anim;
+    public string nameOfSinkAnim;
+
+    public float impactParticleDuration;
     public float currentHp = 100;
     public float maxHp;
     public float LoadTimeMultiplier = 40;
 
     public bool goldHasBeenGiven = false;
+    public bool isSinking;
 
     private void Start() {
         gM = GameObject.Find("GameManager").GetComponent<GameManager>();
         cM = gameObject.GetComponent<CannonManager>();
         maxHp = currentHp;
+        anim = GetComponent<Animator>();
 
         if (tag == "PlayerCannon") {
             cC = GetComponentInParent<CannonCrew>();
@@ -55,7 +62,7 @@ public class HealthPoints : MonoBehaviour {
             currentHp = 0;
         }
         //below: make PCannons' loadtime dependent on remaining HP
-        if (tag == "PlayerCannon") {
+        if (tag == "PlayerCannon") {            
             //below we get a number to add to load time when HP decreases.
             //LoadTimeMultiplier: something in the tens, bigger number = less punishing
             cM.loadTime = cM.loadTime + ((maxHp - currentHp) / LoadTimeMultiplier);
@@ -71,7 +78,12 @@ public class HealthPoints : MonoBehaviour {
                     goldHasBeenGiven = true;
                 }
                 Destroy(GetComponent<ShipMover>().newDestinationObject);
-                Destroy(gameObject, 1f);
+                GetComponent<NavMeshAgent>().speed = 0;
+                GetComponent<CannonManager>().loadTime = 99;
+                
+                anim.Play(nameOfSinkAnim);
+                isSinking = true;
+                Destroy(gameObject, 5f);
             }
         }
     }
@@ -80,6 +92,8 @@ public class HealthPoints : MonoBehaviour {
         yield return new WaitForSeconds(0.6f);
         if (gameObject.tag == "PlayerCannon") {
             AudioFW.Play("sfx_FortImpact");
+            //shake the camera
+            CameraShake.Shake(0.2f, 0.4f);
         } else {
             AudioFW.Play("sfx_ShipImpact");
         }

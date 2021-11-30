@@ -23,7 +23,7 @@ public class TargetLineHandler : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        if (lineEndObj == null) {
+        if (lineEndObj == null || lineEndObj.GetComponent<HealthPoints>().isSinking == true) {
             Destroy(instantiatedLineParent);
         }
         if (lineHasBeenMade == true) {

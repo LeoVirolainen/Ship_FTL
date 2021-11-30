@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerTargetManager : MonoBehaviour {
 
@@ -16,7 +17,7 @@ public class PlayerTargetManager : MonoBehaviour {
         clickScript = GameObject.Find("MouseInputFW").GetComponent<MouseInputFW>();        
     }
 
-    private void Update() { //LOOKAT TARGET
+    private void Update() {
         if (clickScript.selectedTargetForPCannon != null) {
             if (clickScript.selectedPCannon == gameObject) {
                 hasTarget = true;

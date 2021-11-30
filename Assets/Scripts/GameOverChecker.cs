@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOverChecker : MonoBehaviour {
     public GameObject[] PCannons;
@@ -23,6 +24,7 @@ public class GameOverChecker : MonoBehaviour {
     }
     public void GameOver() {
         print("game over! total score:" + (GameObject.Find("GameManager").GetComponent<GameManager>().totalScore));
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        SceneManager.LoadScene("GameOver");
     }
 }

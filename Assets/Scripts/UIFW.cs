@@ -53,7 +53,7 @@ public class UIFW : MonoBehaviour {
         cursorObj.SetActive(false);
         mouseLine = mouseUIParent.GetComponentInChildren<LineRenderer>();
 
-        //mouseUIParent.SetActive(true);  //make graphics visible
+        mouseUIParent.SetActive(true);  //make graphics visible
         mouseLine.enabled = true;
 
         if (startCannon.GetComponent<TargetLineHandler>().instantiatedLineParent != null) {

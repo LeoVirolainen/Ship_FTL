@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6722460884268817630}
   - component: {fileID: 109452873187473914}
   - component: {fileID: 109452873187473915}
+  - component: {fileID: -7870305506680242200}
   m_Layer: 0
   m_Name: Ship_S
   m_TagString: EnemyShip
@@ -53,12 +54,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96e9bfb073c8a94a8b3c275c833bbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipValue: 36
+  shipValue: 30
   gM: {fileID: 0}
   cM: {fileID: 0}
   cC: {fileID: 0}
   cUIh: {fileID: 0}
   takeHitParticle: {fileID: 540236732857132784, guid: 82234e7ad71ea7e4eaacf7a94b21a8a1, type: 3}
+  anim: {fileID: 0}
+  nameOfSinkAnim: Sink_Ship_S
   impactParticleDuration: 5
   currentHp: 60
   maxHp: 0
@@ -181,6 +184,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &-7870305506680242200
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109452873187473912}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ff0d3d497369f574fabd095e7d0b97df, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1823137364344504961
 GameObject:
   m_ObjectHideFlags: 0

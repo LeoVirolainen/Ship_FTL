@@ -43,9 +43,12 @@ public class CannonManager : MonoBehaviour {
                             FireCannon();
                         }
                     }
-                } else {
+                }
+                else {
                     if (GetComponentInParent<CannonCrew>().stationHasBeenWiped == false) {
-                        FireCannon();
+                        if (targetedGO.GetComponent<HealthPoints>().isSinking == false) {
+                            FireCannon();
+                        }
                     }
                 }
             }
@@ -56,7 +59,8 @@ public class CannonManager : MonoBehaviour {
         print(gameObject.name + "'FIRES!'");
         if (gameObject.tag == "PlayerCannon") {
             AudioFW.Play("sfx_CannonFire");
-        } else {
+        }
+        else {
             AudioFW.Play("sfx_ShipCannonFire");
         }
         //Spawn muzzle flashes
@@ -71,7 +75,8 @@ public class CannonManager : MonoBehaviour {
             ParticleSystemOfNewMuzzleEffect.Play();
             Destroy(newMuzzleEffect, loadTime);
 
-        } else { //if tag is PlayerCannon
+        }
+        else { //if tag is PlayerCannon
             GameObject newMuzzleEffect = Instantiate(muzzleParticleGO, muzzleTransform.transform);
             ParticleSystem ParticleSystemOfNewMuzzleEffect = newMuzzleEffect.gameObject.GetComponent<ParticleSystem>();
             ParticleSystemOfNewMuzzleEffect.Stop();
@@ -85,14 +90,16 @@ public class CannonManager : MonoBehaviour {
         if (gameObject.tag == "EnemyShip") {
             targetHasBeenHit = (Random.value > (targetingScript.distanceToTarget / 100));
             print(gameObject.name + targetingScript.distanceToTarget / 100);
-        } else {
+        }
+        else {
             targetHasBeenHit = (Random.value > 0.5f);
         }
 
         if (targetHasBeenHit == true) {
             Debug.Log(gameObject.name + " HAS HIT ITS ENEMY!");
             targetHpScript.TakeDamage(damageOutput, loadTime);
-        } else {
+        }
+        else {
             Debug.Log(gameObject.name + " MISSED!");
         }
 
