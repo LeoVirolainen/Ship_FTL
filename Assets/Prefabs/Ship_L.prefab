@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96e9bfb073c8a94a8b3c275c833bbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipValue: 40
+  shipValue: 30
   gM: {fileID: 0}
   cM: {fileID: 0}
   cC: {fileID: 0}
@@ -98,6 +98,7 @@ MonoBehaviour:
   maxHp: 0
   LoadTimeMultiplier: 20
   goldHasBeenGiven: 0
+  isSinking: 0
 --- !u!114 &3829236382346668737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,10 +118,10 @@ MonoBehaviour:
   targetedGO: {fileID: 0}
   targetHpScript: {fileID: 0}
   targetingScript: {fileID: 0}
-  loadTime: 4
+  loadTime: 10
   loadTimeWhenFullHealth: 0
-  damageOutput: 14
-  rangeOfGuns: 140
+  damageOutput: 33
+  rangeOfGuns: 180
   timeWhenLoaded: 0
 --- !u!114 &3829236382346668742
 MonoBehaviour:
@@ -202,8 +203,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 700947943962857232}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 13
-  m_Speed: 3
+  m_Radius: 21
+  m_Speed: 3.5
   m_Acceleration: 3
   avoidancePriority: 50
   m_AngularSpeed: 20

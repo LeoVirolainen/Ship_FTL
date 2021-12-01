@@ -58,10 +58,12 @@ public class CannonManager : MonoBehaviour {
     public void FireCannon() {
         print(gameObject.name + "'FIRES!'");
         if (gameObject.tag == "PlayerCannon") {
-            AudioFW.Play("sfx_CannonFire");
+            int randomSound = Random.Range(0, 3);
+            AudioFW.Play("sfx_PCannonFire" + randomSound);
         }
         else {
-            AudioFW.Play("sfx_ShipCannonFire");
+            int randomSound = Random.Range(0, 4);
+            AudioFW.Play("sfx_ShipCannonFire" + randomSound);
         }
         //Spawn muzzle flashes
         if (gameObject.tag == "EnemyShip") {

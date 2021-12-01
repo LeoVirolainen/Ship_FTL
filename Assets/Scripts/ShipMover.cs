@@ -25,8 +25,8 @@ public class ShipMover : MonoBehaviour {
         if (hasDestination == false) {
             //Check if HP is high enough to go close or to keep one's distance
             if (myHp.currentHp > (myHpAtStart / 2)) {
-                destination = new Vector3(Random.Range(60, -70), 0, Random.Range(0, -30));
-            } else { destination = new Vector3(Random.Range(100, -100), 0, Random.Range(-40, -100)); }
+                destination = new Vector3(Random.Range(50, -50), 0, Random.Range(30, -15));
+            } else { destination = new Vector3(Random.Range(130, -130), 0, Random.Range(-30, -140)); }
             newDestinationObject = Instantiate(destinationCol, destination, /*this is just "no rotation" ->*/ Quaternion.identity);
             ShipDestination scriptOfDestObject = newDestinationObject.GetComponent<ShipDestination>();
             scriptOfDestObject.shipMoveScript = gameObject.GetComponent<ShipMover>();

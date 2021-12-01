@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CursorGraphicsHandler : MonoBehaviour {
     public Texture2D defaultCursor;
+    public Texture2D reinforceCursor;
     public Vector2 hotSpot = Vector2.zero;
     public CursorMode cursorMode = CursorMode.Auto;
 
@@ -11,11 +12,19 @@ public class CursorGraphicsHandler : MonoBehaviour {
         Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
     }
 
-   /* public void TargetStart() {
-        Cursor.visible = false;
+    public void StartReinforceCursor() {
+        Cursor.SetCursor(reinforceCursor, hotSpot, cursorMode);
     }
 
-    public void TargetEnd() {
-        Cursor.visible = true;
-    }*/
+    public void StopReinforceCursor() {
+        Cursor.SetCursor(defaultCursor, hotSpot, cursorMode);
+    }
+
+    /* public void TargetStart() {
+         Cursor.visible = false;
+     }
+
+     public void TargetEnd() {
+         Cursor.visible = true;
+     }*/
 }

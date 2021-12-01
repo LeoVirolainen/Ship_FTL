@@ -72,20 +72,32 @@ public class HealthPoints : MonoBehaviour {
         }
         if (currentHp <= 0) {
             if (tag == "EnemyShip") { //if this is a ship, give player GP and destroy this
-                if (goldHasBeenGiven == false) {
-                    gM.goldPieces = gM.goldPieces + shipValue;
-                    gM.totalScore = gM.totalScore + shipValue;
-                    goldHasBeenGiven = true;
-                }
-                Destroy(GetComponent<ShipMover>().newDestinationObject);
-                GetComponent<NavMeshAgent>().speed = 0;
-                GetComponent<CannonManager>().loadTime = 99;
-                
-                anim.Play(nameOfSinkAnim);
-                isSinking = true;
-                Destroy(gameObject, 5f);
+                StartCoroutine ("ShipSink");                
             }
         }
+    }
+
+    public IEnumerator ShipSink() {
+        if (goldHasBeenGiven == false) {
+            StartCoroutine("PlayMoneySFX");
+            gM.goldPieces = gM.goldPieces + shipValue;
+            gM.totalScore = gM.totalScore + shipValue;
+            goldHasBeenGiven = true;
+        }       
+        GetComponent<CannonManager>().loadTime = 99;
+        
+        isSinking = true;
+        Destroy(gameObject, 5f);
+        yield return new WaitForSeconds(0.7f); //emission -> time value of spawned particle effect in TakeDamage + 0.1f
+        Destroy(GetComponent<ShipMover>().newDestinationObject);
+        GetComponent<NavMeshAgent>().speed = 0;
+        AudioFW.Play("sfx_ShipSink");
+        anim.Play(nameOfSinkAnim);
+    }
+
+    private IEnumerator PlayMoneySFX() {
+        yield return new WaitForSeconds(2f);
+        AudioFW.Play("sfx_GetMoney");
     }
 
     private IEnumerator PlayImpactSFX() {

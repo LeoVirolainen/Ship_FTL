@@ -7,8 +7,11 @@ public class GameOverChecker : MonoBehaviour {
     public GameObject[] PCannons;
     public float totalHealth;
 
+    public GameManager gM;
+
     private void Start() {
-        CheckPCannons();
+        gM = GetComponent<GameManager>();
+        CheckPCannons();        
     }
 
     public void CheckPCannons() {
@@ -21,6 +24,7 @@ public class GameOverChecker : MonoBehaviour {
         if (totalHealth <= 0) {
             GameOver();            
         }
+        gM.PCannonAmountChanged();
     }
     public void GameOver() {
         print("game over! total score:" + (GameObject.Find("GameManager").GetComponent<GameManager>().totalScore));

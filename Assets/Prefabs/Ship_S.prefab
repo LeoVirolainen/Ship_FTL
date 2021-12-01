@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96e9bfb073c8a94a8b3c275c833bbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipValue: 30
+  shipValue: 22
   gM: {fileID: 0}
   cM: {fileID: 0}
   cC: {fileID: 0}
@@ -67,6 +67,7 @@ MonoBehaviour:
   maxHp: 0
   LoadTimeMultiplier: 30
   goldHasBeenGiven: 0
+  isSinking: 0
 --- !u!114 &4403025707606219817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,8 +172,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 109452873187473912}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 6
-  m_Speed: 9
+  m_Radius: 8
+  m_Speed: 8
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 30

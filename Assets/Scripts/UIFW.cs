@@ -56,10 +56,20 @@ public class UIFW : MonoBehaviour {
         mouseUIParent.SetActive(true);  //make graphics visible
         mouseLine.enabled = true;
 
-        if (startCannon.GetComponent<TargetLineHandler>().instantiatedLineParent != null) {
+        if (startCannon.GetComponent<TargetLineHandler>().instantiatedLineParent != null) { //reshow white line when clicking cannon again
             startCannon.GetComponent<TargetLineHandler>().instantiatedLineParent.SetActive(false);
             startCannon.GetComponent<TargetLineHandler>().instantiatedLineParent.SetActive(true);
         }
+    }
+
+    public void CannonHoverStart(GameObject cannonUnderMouse) {
+        if (cannonUnderMouse.GetComponent<TargetLineHandler>().instantiatedLineParent != null) {
+            cannonUnderMouse.GetComponent<TargetLineHandler>().instantiatedLineParent.SetActive(false);
+            cannonUnderMouse.GetComponent<TargetLineHandler>().instantiatedLineParent.SetActive(true);
+        }
+    }
+
+    public void CannonHoverEnd(GameObject cannonUnderMouse) {
     }
 
     public void ShipHoverStart(GameObject shipUnderMouse) {

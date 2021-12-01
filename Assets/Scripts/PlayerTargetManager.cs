@@ -14,7 +14,7 @@ public class PlayerTargetManager : MonoBehaviour {
 
     private void Start() {
         myCannonScript = gameObject.GetComponent<CannonManager>();
-        clickScript = GameObject.Find("MouseInputFW").GetComponent<MouseInputFW>();        
+        clickScript = GameObject.Find("MouseInputFW").GetComponent<MouseInputFW>();
     }
 
     private void Update() {
@@ -33,6 +33,16 @@ public class PlayerTargetManager : MonoBehaviour {
 
     private void OnMouseDown() { //delegate all click tasks to MouseInputFW
         clickScript.ClickedOnPCannon(gameObject);
+    }
+
+    private void OnMouseEnter() {
+        if (GetComponentInParent<CannonCrew>().stationHasBeenWiped == false) {
+            clickScript.MouseOverCannon(gameObject);
+        }
+    }
+
+    private void OnMouseExit() {
+        clickScript.MouseExitCannon(gameObject);
     }
 
     public void FindTarget() {

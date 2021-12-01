@@ -9,19 +9,28 @@ public class ShipSpawner : MonoBehaviour {
 
     public GameObject[] shipOptions;
 
-    public float shipSpawnRate = 5f;
+    public GameManager gM;
 
-    public int maxShips;
     public bool waitingForNextShipToSpawn = false;
+
+    public bool firstShipSpawned = false;
+
+    private void Start() {
+        gM = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
     private void Update() {
         shipsInScene = GameObject.FindGameObjectsWithTag("EnemyShip");
-        if (shipsInScene.Length < maxShips) {
+        if (shipsInScene.Length < gM.maxShips) {
             if (waitingForNextShipToSpawn == false) {
                 StartCoroutine("SpawnShip");
             }
         }
+        if (shipsInScene.Length == 0 && firstShipSpawned == true) {
+            SpawnExtraShip();
+        }
     }
+
     IEnumerator SpawnShip() {
         waitingForNextShipToSpawn = true;
 
@@ -30,7 +39,14 @@ public class ShipSpawner : MonoBehaviour {
         shipToBeSpawned = shipOptions[shipSelectorInt];
 
         Instantiate(shipToBeSpawned, shipSpawnPoint.transform);
-        yield return new WaitForSeconds(shipSpawnRate);
+        yield return new WaitForSeconds(gM.shipSpawnRate);
+        firstShipSpawned = true;
         waitingForNextShipToSpawn = false;
+    }
+
+    public void SpawnExtraShip() {
+        int shipSelectorInt = Random.Range(0, 3);
+        shipToBeSpawned = shipOptions[shipSelectorInt];
+        Instantiate(shipToBeSpawned, shipSpawnPoint.transform);
     }
 }

@@ -57,11 +57,14 @@ MonoBehaviour:
   cC: {fileID: 0}
   cUIh: {fileID: 0}
   takeHitParticle: {fileID: 340545942937406918, guid: 25b9dfe94f0ce334e881ee847ac7f469, type: 3}
+  anim: {fileID: 0}
+  nameOfSinkAnim: 
   impactParticleDuration: 2
   currentHp: 100
   maxHp: 0
   LoadTimeMultiplier: 40
   goldHasBeenGiven: 0
+  isSinking: 0
 --- !u!114 &3767022307200800599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -678,7 +681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6418487994069595898, guid: bba367112bbbcd74e8a3ca880f0a926d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: 6418487994069595898, guid: bba367112bbbcd74e8a3ca880f0a926d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -761,7 +764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6418487994069595898, guid: bba367112bbbcd74e8a3ca880f0a926d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: 0.0080001205
       objectReference: {fileID: 0}
     - target: {fileID: 6418487994069595898, guid: bba367112bbbcd74e8a3ca880f0a926d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -844,7 +847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6418487994069595898, guid: bba367112bbbcd74e8a3ca880f0a926d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: 0.0080001205
       objectReference: {fileID: 0}
     - target: {fileID: 6418487994069595898, guid: bba367112bbbcd74e8a3ca880f0a926d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -927,7 +930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6418487994069595898, guid: bba367112bbbcd74e8a3ca880f0a926d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: 0.0080001205
       objectReference: {fileID: 0}
     - target: {fileID: 6418487994069595898, guid: bba367112bbbcd74e8a3ca880f0a926d, type: 3}
       propertyPath: m_LocalPosition.z
