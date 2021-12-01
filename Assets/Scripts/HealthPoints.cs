@@ -36,7 +36,7 @@ public class HealthPoints : MonoBehaviour {
 
         if (tag == "PlayerCannon") {
             cC = GetComponentInParent<CannonCrew>();
-            cUIh = GetComponentInChildren<PCannonUIHandler>();
+            cUIh = cC.gameObject.GetComponentInChildren<PCannonUIHandler>();
             cC.WipeAndStart();
         } else {
             cC = null;
@@ -79,10 +79,7 @@ public class HealthPoints : MonoBehaviour {
 
     public IEnumerator ShipSink() {
         if (goldHasBeenGiven == false) {
-            StartCoroutine("PlayMoneySFX");
-            gM.goldPieces = gM.goldPieces + shipValue;
-            gM.totalScore = gM.totalScore + shipValue;
-            goldHasBeenGiven = true;
+            StartCoroutine("GiveMoney");
         }       
         GetComponent<CannonManager>().loadTime = 99;
         
@@ -95,9 +92,12 @@ public class HealthPoints : MonoBehaviour {
         anim.Play(nameOfSinkAnim);
     }
 
-    private IEnumerator PlayMoneySFX() {
+    private IEnumerator GiveMoney() {
         yield return new WaitForSeconds(2f);
         AudioFW.Play("sfx_GetMoney");
+        gM.goldPieces = gM.goldPieces + shipValue;
+        gM.totalScore = gM.totalScore + shipValue;
+        goldHasBeenGiven = true;
     }
 
     private IEnumerator PlayImpactSFX() {

@@ -16,39 +16,54 @@ public class PCannonUIHandler : MonoBehaviour {
 
     public float timeWhenTimerStopped;
 
+    public GameObject vfxForNoTargetAlert;
+    public bool targetAlertHasBeenInstantiated;
+
     public CannonManager cm;
-    void Start() {
-        maxRadial = GetComponentInParent<CannonManager>().loadTime;
+
+    void Start() {        
         radialCanvas = GetComponentInChildren<Canvas>();
-        cm = GetComponentInParent<CannonManager>();
+        cm = GetComponentInParent<CannonCrew>().gameObject.GetComponentInChildren<CannonManager>();
     }
 
     void Update() {
         GetCurrentReloadFill();
 
-        radialCanvas.transform.eulerAngles = new Vector3(90, 0, 0);
-
-        if (GetComponentInParent<CannonManager>().targetedGO != null) {
-            if (isVisible == false) {
-                radialCanvas.enabled = true;
-                isVisible = true;
-            }
-        } else {
-            timeWhenTimerStopped = Time.time;
-            if (isVisible == true) {
-                if (fill.fillAmount <= 0) { 
-                    radialCanvas.enabled = false;
-                    isVisible = false;
+        if (cm.targetedGO != null) {
+            if (cm.targetedGO.GetComponent<HealthPoints>().isSinking == false) {
+                if (isVisible == false) {
+                    radialCanvas.enabled = true;
+                    isVisible = true;
+                }
+            } else {
+                timeWhenTimerStopped = Time.time;
+                if (isVisible == true) {
+                    if (fill.fillAmount <= 0) {
+                        radialCanvas.enabled = false;
+                        isVisible = false;
+                    }
                 }
             }
         }
     }
 
     public void GetCurrentReloadFill() {
+        maxRadial = GetComponentInParent<CannonCrew>().gameObject.GetComponentInChildren<CannonManager>().loadTime;
         currentRadial = cm.timeWhenLoaded - Time.time;
         float currentOffset = currentRadial - minRadial;
         float maximumOffset = maxRadial - minRadial;
         float fillAmount = currentOffset / maximumOffset;
         mask.fillAmount = fillAmount;
+    }
+
+    public IEnumerator NoTargetAlert() {
+        if (targetAlertHasBeenInstantiated == false) {
+            if (GetComponentInParent<CannonCrew>().stationHasBeenWiped == false) {                
+                vfxForNoTargetAlert.SetActive(true);
+                targetAlertHasBeenInstantiated = true;
+                yield return new WaitForSeconds(2);
+                vfxForNoTargetAlert.SetActive(false);
+            }
+        }
     }
 }

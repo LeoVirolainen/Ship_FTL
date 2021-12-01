@@ -27,7 +27,7 @@ public class MouseInputFW : MonoBehaviour {
             Destroy(instantiatedSelectionVFX);
         }
         if (gCM.reinforcing == false) {
-            instantiatedSelectionVFX = Instantiate(vfxForSelectedCannon, clickedCannon.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            instantiatedSelectionVFX = Instantiate(vfxForSelectedCannon, clickedCannon.transform.position + new Vector3(0, 2, 2), Quaternion.identity);
         }
         selectedPCannon = clickedCannon;
         print("You clicked a cannon!");
@@ -64,7 +64,7 @@ public class MouseInputFW : MonoBehaviour {
         if (instantiatedHoverVFX != null) { //destroy previous VFX
             Destroy(instantiatedHoverVFX);
         }
-        instantiatedHoverVFX = Instantiate(vfxForHoveredCannon, cannonUnderMouse.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        instantiatedHoverVFX = Instantiate(vfxForHoveredCannon, cannonUnderMouse.transform.position + new Vector3(0, 1, 2), Quaternion.identity);
         uIScript.CannonHoverStart(cannonUnderMouse);
     }
 

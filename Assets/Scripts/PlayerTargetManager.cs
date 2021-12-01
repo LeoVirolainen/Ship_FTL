@@ -7,6 +7,8 @@ public class PlayerTargetManager : MonoBehaviour {
 
     public CannonManager myCannonScript;
     public MouseInputFW clickScript;
+    public PCannonUIHandler cannonUI;
+    public ShipSpawner sS;
 
     //LOCAL VARIABLES
     public GameObject[] enemyTargets;
@@ -14,7 +16,9 @@ public class PlayerTargetManager : MonoBehaviour {
 
     private void Start() {
         myCannonScript = gameObject.GetComponent<CannonManager>();
+        cannonUI = GetComponentInParent<CannonCrew>().gameObject.GetComponentInChildren<PCannonUIHandler>();
         clickScript = GameObject.Find("MouseInputFW").GetComponent<MouseInputFW>();
+        sS = GameObject.Find("ShipSpawner").GetComponent<ShipSpawner>();
     }
 
     private void Update() {
@@ -27,7 +31,11 @@ public class PlayerTargetManager : MonoBehaviour {
             if (myCannonScript.targetedGO != null) {
                 transform.LookAt(myCannonScript.targetedGO.transform);
                 transform.Rotate(0, 180, 0);
+                cannonUI.targetAlertHasBeenInstantiated = false;
             }
+        }
+        if (sS.firstShipSpawned == true && myCannonScript.targetedGO == null) {
+            cannonUI.StartCoroutine("NoTargetAlert");
         }
     }
 

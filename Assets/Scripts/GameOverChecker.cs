@@ -22,12 +22,12 @@ public class GameOverChecker : MonoBehaviour {
         }
 
         if (totalHealth <= 0) {
-            GameOver();            
+            StartCoroutine("GameOver");            
         }
         gM.PCannonAmountChanged();
     }
-    public void GameOver() {
-        print("game over! total score:" + (GameObject.Find("GameManager").GetComponent<GameManager>().totalScore));
+    public IEnumerator GameOver() {
+        yield return new WaitForSeconds(2);
         //Time.timeScale = 0;
         SceneManager.LoadScene("GameOver");
     }

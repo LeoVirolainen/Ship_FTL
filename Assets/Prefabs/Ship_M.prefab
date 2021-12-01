@@ -362,8 +362,8 @@ MonoBehaviour:
   targetingScript: {fileID: 0}
   loadTime: 2
   loadTimeWhenFullHealth: 0
-  damageOutput: 10
-  rangeOfGuns: 110
+  damageOutput: 14
+  rangeOfGuns: 180
   timeWhenLoaded: 0
 --- !u!114 &6773760878193829072
 MonoBehaviour:

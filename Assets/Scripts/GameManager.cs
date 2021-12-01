@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour {
         shipSpawnRate = (defaultShipSpawnRate - (PCannonHealth * PCannonHealth));
         if (shipSpawnRate > maxSpawnRate) {
             shipSpawnRate -= spawnRateDecayPerDifficultyRaise;
+            spawnRateDecayPerDifficultyRaise += 0.2f;
         }
 
         yield return new WaitForSeconds(difficultyChangeInterval);

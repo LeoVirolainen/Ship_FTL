@@ -12,7 +12,7 @@ public class GlobalCrewManager : MonoBehaviour {
 
     public bool reinforcing = false;
 
-    public int reinforcePrice = 50;
+    public int reinforcePrice = 30;
 
     private void Start() {
         mouseScript = GameObject.Find("MouseInputFW").GetComponent<MouseInputFW>();
@@ -40,6 +40,7 @@ public class GlobalCrewManager : MonoBehaviour {
             gM.goldPieces = gM.goldPieces - reinforcePrice;
             if (cannonToReinforce != null) { //start crewreinforced() in active player cannon
                 cannonToReinforce.GetComponentInParent<CannonCrew>().CrewReinforced();
+                reinforcePrice = reinforcePrice * 2;
             }
         }
         StopReinforce();
@@ -48,6 +49,6 @@ public class GlobalCrewManager : MonoBehaviour {
     public void StopReinforce() {
         reinforcing = false;
         cursorScript.StopReinforceCursor();
-        reinforceButton.GetComponentInChildren<Text>().text = ("Reinforce (50r)");
+        reinforceButton.GetComponentInChildren<Text>().text = ("Reinforce (" + reinforcePrice + "r)");
     }
 }
