@@ -41,9 +41,9 @@ public class TargetManager : MonoBehaviour {
     }
 
     private void Update() {
-            if (waitingToScoutAgain == false || myCannonScript.targetedGO.activeSelf == false) {
-                StartCoroutine("FindBestTarget");
-            }
+        if (waitingToScoutAgain == false || myCannonScript.targetedGO.GetComponentInParent<CannonCrew>().stationHasBeenWiped == true) {
+            StartCoroutine("FindBestTarget");
+        }
         //check if close enough to fire
         if ((distanceToTarget * 2) <= myCannonScript.rangeOfGuns) {
             CloseEnoughToFire = true;
@@ -55,14 +55,11 @@ public class TargetManager : MonoBehaviour {
     IEnumerator FindBestTarget() { //add available PCannons to array --- measure new distance to first cannon in array
         waitingToScoutAgain = true;
         enemyTargets = GameObject.FindGameObjectsWithTag("PlayerCannon");
-        myCannonScript.targetedGO = enemyTargets[0]; //FAILSAFE: set first member of array as target
-        distanceToTarget = Vector3.Distance(gameObject.transform.position, enemyTargets[0].transform.position);
-        print(gameObject.name + "'s dist to target: " + distanceToTarget);
 
-        for (int i = 1; i < enemyTargets.Length; ++i) { //Go through the list of previously found cannon --- Find nearest cannon and set as target
+        for (int i = 0; i < enemyTargets.Length; ++i) { //Go through the list of previously found cannon --- Find nearest cannon and set as target
             float nextCannonDist = Vector3.Distance(gameObject.transform.position, enemyTargets[i].transform.position);
-            print(gameObject.name + "'s dist to target: " + distanceToTarget);
-            if (nextCannonDist < distanceToTarget) {
+
+            if (nextCannonDist < distanceToTarget)  {
                 if (enemyTargets[i].GetComponentInParent<CannonCrew>().stationHasBeenWiped == false) {//check if new target candidate is intact
                     distanceToTarget = nextCannonDist;
                     print(distanceToTarget);

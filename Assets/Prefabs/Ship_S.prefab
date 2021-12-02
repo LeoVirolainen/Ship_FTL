@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f96e9bfb073c8a94a8b3c275c833bbd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipValue: 22
+  shipValue: 16
   gM: {fileID: 0}
   cM: {fileID: 0}
   cC: {fileID: 0}
@@ -63,7 +63,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   nameOfSinkAnim: Sink_Ship_S
   impactParticleDuration: 5
-  currentHp: 60
+  currentHp: 90
   maxHp: 0
   LoadTimeMultiplier: 30
   goldHasBeenGiven: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
   targetedGO: {fileID: 0}
   targetHpScript: {fileID: 0}
   targetingScript: {fileID: 0}
-  loadTime: 1.6
+  loadTime: 1.3
   loadTimeWhenFullHealth: 0
   damageOutput: 8
   rangeOfGuns: 140
@@ -110,7 +110,7 @@ MonoBehaviour:
   seekTargetKey: 263
   enemyTargets: []
   CloseEnoughToFire: 0
-  distanceToTarget: 0
+  distanceToTarget: 9999
   waitingToScoutAgain: 0
   scoutingInterval: 3
   rangeCylinder: {fileID: 0}

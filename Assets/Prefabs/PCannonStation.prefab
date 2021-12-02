@@ -630,7 +630,7 @@ Transform:
   m_GameObject: {fileID: 1778316782453950274}
   m_LocalRotation: {x: 0, y: -0.92387956, z: 0, w: 0.38268343}
   m_LocalPosition: {x: 0.65, y: 0.0080001205, z: 1.177}
-  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 2239900340702898382}
   - {fileID: 2968886176728018013}
@@ -698,7 +698,7 @@ Transform:
   m_GameObject: {fileID: 1778316782971820351}
   m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
   m_LocalPosition: {x: -0.372, y: 0.0080001205, z: 1.428}
-  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 2239900341253535411}
   - {fileID: 2968886176101888544}
@@ -766,7 +766,7 @@ Transform:
   m_GameObject: {fileID: 1778316783636244184}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.629, y: 0.0080001205, z: -0.019}
-  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 2239900341667039572}
   - {fileID: 2968886175696719303}
@@ -4140,6 +4140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crewDamage: 0
+  oldCrewDamage: 0
   stationHasBeenWiped: 0
   startAsWiped: 0
   hpScript: {fileID: 0}
@@ -4855,7 +4856,7 @@ Transform:
   m_GameObject: {fileID: 8599442508722211306}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.773, y: 0.008, z: 0}
-  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 8137788649814091366}
   - {fileID: 5100635438707663605}

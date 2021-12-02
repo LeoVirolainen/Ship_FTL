@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class MuteButton : MonoBehaviour {
     public AudioSource[] audioSources;
-    public bool muteOn = false;
+    private bool muteOn = false;
 
     private void Start() {
-        audioSources = FindObjectsOfType<AudioSource>();
+        GameObject sfxParent = GameObject.Find("SFX");
+        audioSources = sfxParent.GetComponentsInChildren<AudioSource>();
     }
 
     public void ToggleMute() {
