@@ -8,7 +8,8 @@ public class ShipSpawner : MonoBehaviour {
     public GameObject[] shipsInScene;
 
     public GameObject[] shipOptions;
-
+    public int spawnableShipTypesLimit = 2;
+    
     public GameManager gM;
 
     public bool waitingForNextShipToSpawn = false;
@@ -35,18 +36,28 @@ public class ShipSpawner : MonoBehaviour {
         waitingForNextShipToSpawn = true;
 
         //choose random ship
-        int shipSelectorInt = Random.Range(0, 3);
+        int shipSelectorInt = Random.Range(0, spawnableShipTypesLimit);
         shipToBeSpawned = shipOptions[shipSelectorInt];
 
         Instantiate(shipToBeSpawned, shipSpawnPoint.transform);
+
+        if (gM.hardModeTriggered == true) {
+            int shipSelectorIntForSecondSpawn = Random.Range(0, spawnableShipTypesLimit);
+            shipToBeSpawned = shipOptions[shipSelectorIntForSecondSpawn];
+            Instantiate(shipToBeSpawned, shipSpawnPoint.transform);
+        }
         yield return new WaitForSeconds(gM.shipSpawnRate);
         firstShipSpawned = true;
         waitingForNextShipToSpawn = false;
     }
 
     public void SpawnExtraShip() {
-        int shipSelectorInt = Random.Range(0, 3);
+        int shipSelectorInt = Random.Range(0, spawnableShipTypesLimit);
         shipToBeSpawned = shipOptions[shipSelectorInt];
         Instantiate(shipToBeSpawned, shipSpawnPoint.transform);
+    }
+
+    public void EnterHardMode() {
+        spawnableShipTypesLimit = 3;
     }
 }

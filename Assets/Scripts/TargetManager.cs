@@ -29,7 +29,9 @@ public class TargetManager : MonoBehaviour {
     }
 
     private void OnMouseDown() { //delegate all click tasks to MouseInputFW
-        clickScript.ClickedOnShip(gameObject);
+        if (clickScript.selectedPCannon != null) {
+            clickScript.ClickedOnShip(gameObject);
+        }
     }
 
     private void OnMouseEnter() {
@@ -41,7 +43,7 @@ public class TargetManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (waitingToScoutAgain == false) { 
+        if (waitingToScoutAgain == false) {
             StartCoroutine("FindBestTarget");
         }
         if (myCannonScript.targetedGO.GetComponentInParent<CannonCrew>().stationHasBeenWiped == true) {
@@ -60,7 +62,7 @@ public class TargetManager : MonoBehaviour {
         waitingToScoutAgain = true;
         enemyTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("PlayerCannon"));
 
-        
+
 
         List<GameObject> activeTargets = new List<GameObject>();
 

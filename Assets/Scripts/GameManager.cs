@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour {
     public int defaultMaxShips = 2;
     public int maxShips;
 
+    public bool hardModeTriggered = false;
+    public bool sixtyCoinsEarned = false;
 
     void Start() {
         spawnerScript = GameObject.Find("ShipSpawner").GetComponent<ShipSpawner>();
@@ -32,6 +34,12 @@ public class GameManager : MonoBehaviour {
 
     public void CheckScore() {
         totalScore = totalScore + 1;
+    }
+
+    public void CheckCoins() {
+        if (goldPieces >= 60) {
+            sixtyCoinsEarned = true;
+        }
     }
 
     void FixedUpdate() {
@@ -45,13 +53,19 @@ public class GameManager : MonoBehaviour {
 
     public void PCannonAmountChanged() {
         PCannonHealth = gameOverScript.totalHealth / 100;
+        if (gameOverScript.totalHealth > 200 && sixtyCoinsEarned == true) {
+            if (hardModeTriggered == false) {
+                spawnerScript.EnterHardMode();
+                hardModeTriggered = true;
+            }
+        }
     }
 
     IEnumerator RaiseDifficulty() {
         waitingToRaiseDifficulty = true;
         maxShips = defaultMaxShips + (int)PCannonHealth;
 
-        shipSpawnRate = (defaultShipSpawnRate - (PCannonHealth * PCannonHealth));
+        shipSpawnRate = defaultShipSpawnRate - ((PCannonHealth * PCannonHealth) - PCannonHealth);
         if (shipSpawnRate > maxSpawnRate) {
             shipSpawnRate -= spawnRateDecayPerDifficultyRaise;
             spawnRateDecayPerDifficultyRaise += 0.2f;

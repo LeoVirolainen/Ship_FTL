@@ -97,6 +97,9 @@ public class HealthPoints : MonoBehaviour {
         AudioFW.Play("sfx_GetMoney");
         gM.goldPieces = gM.goldPieces + shipValue;
         gM.totalScore = gM.totalScore + shipValue;
+        if (gM.sixtyCoinsEarned == false) {
+            gM.CheckCoins();
+        }
         goldHasBeenGiven = true;
     }
 

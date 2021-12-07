@@ -1040,7 +1040,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4f714dc5d84ce2d42a1a665da111e7b3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2211,7 +2211,7 @@ MonoBehaviour:
   gpText: {fileID: 20625730}
   tsText: {fileID: 1722033107}
   PCannonHealth: 0
-  difficultyChangeInterval: 20
+  difficultyChangeInterval: 15
   waitingToRaiseDifficulty: 0
   spawnerScript: {fileID: 0}
   gameOverScript: {fileID: 0}
@@ -2221,6 +2221,7 @@ MonoBehaviour:
   spawnRateDecayPerDifficultyRaise: 0.3
   defaultMaxShips: 2
   maxShips: 0
+  hardModeTriggered: 0
 --- !u!4 &854008690
 Transform:
   m_ObjectHideFlags: 0
@@ -4206,7 +4207,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b2cb2cd7608a59e4c8be697e63d6b754, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.22
+  m_Volume: 0.28
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4865,6 +4866,7 @@ MonoBehaviour:
   - {fileID: 109452873187473912, guid: 77bfaefad083a5440afa32bdd1174d0b, type: 3}
   - {fileID: 7106488769546174726, guid: 3c30b29572610dd44b0fba71d84e4daa, type: 3}
   - {fileID: 700947943962857232, guid: 26e6ca2dbae7c714b9217a4db58acf01, type: 3}
+  spawnableShipTypesLimit: 2
   gM: {fileID: 0}
   waitingForNextShipToSpawn: 0
   firstShipSpawned: 0
